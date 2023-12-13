@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=604800" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>GreatKart | One of the Biggest Online Shopping Platform</title>
+
+<link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+
+<!-- jQuery -->
+<script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+<link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
+
+<!-- custom style -->
+<link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+<!-- custom javascript -->
+<script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+
+<script type="text/javascript">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
+<!-- jQuery css for search product -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- Alertify CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+<style>
+	.header-main {
+	  position: sticky;
+	  padding-top: 1rem;
+	  padding-bottom: 1rem;
+	  z-index: 1000;
+	}
+  </style>  
+
+</head>
+<body>
+
+
+<header class="section-header">
+<section class="header-main border-bottom">
+	<div class="container">
+<div class="row align-items-center">
+	<div class="col-lg-2 col-md-3 col-6">
+		<a href="./" class="brand-wrap">
+			<img class="logo" src="{% static './images/logo.png' %}">
+		</a> <!-- brand-wrap.// -->
+	</div>
+	<div class="col-lg col-sm col-md col-6 flex-grow-0">
+		<div class="category-wrap dropdown d-inline-block float-right">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
+				<i class="fa fa-bars"></i> All category 
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				<li><a class="dropdown-item" href="{% url 'category-view' category_name='t-shirt' %}">Tshirt</a></li>
+				<li><a class="dropdown-item" href="{% url 'category-view' category_name='shirt' %}">Shirt</a></li>
+				<li><a class="dropdown-item" href="{% url 'category-view' category_name='jeans' %}">Jeans</a></li>
+				<li><a class="dropdown-item" href="{% url 'category-view' category_name='jacket' %}">Jacket</a></li>
+			  </ul>
+		</div>  <!-- category-wrap.// -->
+	</div> <!-- col.// -->
+	<a href="#" class="btn btn-outline-primary">Store</a>
+	<div class="col-lg  col-md-6 col-sm-12 col">
+		<form action="{% url 'searchproduct' %}" class="search" method="POST">
+			{% csrf_token %}
+			  <div class="input-group w-100">
+				  <input type="search" required class="form-control" style="width:60%;" id="searchproduct" name="productsearch" placeholder="Search Product">
+
+				  <div class="input-group-append">
+					  <button class="btn btn-primary" type="submit">
+						  <i class="fa fa-search"></i>
+					  </button>
+				  </div>
+			  </div>
+		  </form> <!-- search-wrap .end// -->
+	</div> <!-- col.// -->
+	<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+				<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					<div class="widget-header px-4">
+						{% if request.user.is_authenticated %}
+						<button class="title text-muted py-2 mt-2" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:white; border: 1px solid #ffffff !important;">{{request.user}}</button>
+						   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+							<li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
+							<li><a class="dropdown-item" href="{% url 'profile-view' %}">Profile</a></li>
+							<li><a class="dropdown-item" href="{% url 'my-orders' %}">My Orders</a></li>
+							<li><a class="dropdown-item" href="{% url 'logoutpage' %}">Logout</a></li> 
+						  </ul>
+						{% else %}
+						<!-- <small class="title text-muted ">Welcome</small> -->
+						<div class = "pt-3 ">
+							<a href="./signin.html"> Login</a> <span class="dark-transp"></span>
+							<!-- <a href="./register.html"> Register</a> -->
+						</div>
+						{% endif %}
+					</div>
+					<a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+						{% if total_quantity == 0 %}
+						  <span></span>
+						{% else %}
+						<span class="badge badge-pill badge-danger notify">{{total_quantity}}</span>
+						{% endif %}
+					  </a>
+					  <a href="{% url 'wishlist' %}" class="widget-header pl-3 ml-3">
+						<div class="icon icon-sm rounded-circle border"><i class="fa fa-heart"></i></div>
+						{% if total_item == 0 %}
+						<span ></span>
+						{% else %}
+						<span class="badge badge-pill notify" style="background-color: green; color: white;">{{total_item}}</span>
+						{% endif %}
+					  </a>
+				</div> <!-- widgets-wrap.// -->
+			</div> <!-- col.// -->
+</div> <!-- row.// -->
+	</div> <!-- container.// -->
+</section> <!-- header-main .// -->
+
+
+
+</header> <!-- section-header.// -->
+
+
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+
+<!-- ========================= SECTION INTRO END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<div class="container">
+<div class="row">
+	<aside class="col-md-3">
+		<div class="card">
+			<!-- filtering based on category of the product  -->
+		<article class="filter-group">
+			<header class="card-header">
+				<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+					<i class="icon-control fa fa-chevron-down"></i>
+					<h6 class="title">Categories</h6>
+				</a>
+			</header>
+			<div class="filter-content collapse show" id="collapse_1" >
+		  {% for cat in category %}
+		 <div>
+			<div class="ml-4">
+				<label class="checkbox-btn px-2">
+					<input type="checkbox" >
+					<span class="btn btn-light px-2 d-inline-block" style="height: 30px; line-height: 26px;">{{cat.name}}</span>
+			    </label>
+			</div> <!-- card-body.// -->
+		<!--card -->
+			{% endfor %}
+		 </div>
+	</article> <!-- filter-group .// -->
+
+	<!-- filtering based on size of the product  -->
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
+				<i class="icon-control fa fa-chevron-down"></i>
+				<h6 class="title"></h6>
+			</a>
+		</header>
+		<!-- <div class="filter-content collapse show" id="collapse_4" >
+			{% for prod in prods %}
+			<div class="ml-4">
+				 <label class="checkbox-btn">
+					<input type="checkbox">
+					<span class="btn btn-light"> {{prod.size}}</span>
+			    </label>
+            </div><!-- card-body.// -->
+		<!-- {% endfor %}
+		</div> --> 
+	</article> <!-- filter-group .// -->
+
+	<!-- filtering based on price range of the product  -->
+	<article class="filter-group">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+				<i class="icon-control fa fa-chevron-down"></i>
+				<!-- <h6 class="title">Price range </h6> -->
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse_3">
+			<div class="card-body">
+				
+				<div class="form-row">
+				<div class="form-group col-md-6">
+				  <!-- <label>Min</label> -->
+				  <!-- <input class="form-control" placeholder="$0" type="number"> -->
+				  	<!-- <select class="mr-2 form-control">
+						<option value="0">$0</option>
+						<option value="50">$50</option>
+						<option value="100">$100</option>
+						<option value="150">$150</option>
+						<option value="200">$200</option>
+						<option value="500">$500</option>
+						<option value="1000">$1000</option>
+					</select> -->
+				</div>
+				<div class="form-group text-right col-md-6">
+				  <!-- <label>Max</label>
+				  	<select class="mr-2 form-control">
+						<option value="50">$50</option>
+						<option value="100">$100</option>
+						<option value="150">$150</option>
+						<option value="200">$200</option>
+						<option value="500">$500</option>
+						<option value="1000">$1000</option>
+						<option value="2000">$2000+</option>
+					</select> -->
+				</div>
+				</div> <!-- form-row.// -->
+				<button class="btn btn-block btn-primary">Apply</button>
+			</div><!-- card-body.// -->
+		</div>
+	</article> <!-- filter-group .// -->
+	
+</div> <!-- card.// -->
+
+</aside> <!-- col.// -->
+	<main class="col-md-9">
+
+<header class="border-bottom mb-4 pb-3">
+		<div class="form-inline">
+			<!-- <span class="mr-md-auto">32 Items found </span> -->
+			
+		</div>
+</header><!-- sect-heading -->
+
+<div class="row">
+	{% for prod in prods %}
+	<div class="col-md-4">
+		<figure class="card card-product-grid">
+			<div class="img-wrap"> 
+				<a href="{% url 'productdetail' prod.id %}">
+					<img src="{{prod.image.url}}">
+				</a>
+			</div> <!-- img-wrap.// -->
+			<figcaption class="info-wrap">
+				<div class="fix-height">
+					<a href="{% url 'productdetail' prod.id %}" class="title">{{prod.title}}</a>
+					<div class="price-wrap mt-2">
+						<span class="price">Rs {{prod.price}}</span>
+						<!-- <del class="price-old">$1980</del> -->
+					</div> <!-- price-wrap.// -->
+				</div>
+				<!-- <a href="#" class="btn btn-block btn-success">Added to cart </a> -->
+			</figcaption>
+		</figure>
+	</div> <!-- col.// -->
+	{% endfor %}
+</div> 
+
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+	  {% if prods.has_previous %}
+		<li class="page-item">
+		  <a class="page-link" href="{% url 'store' %}?page={{ prods.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+		</li>
+	  {% else %}
+		<li class="page-item disabled">
+		  <span class="page-link" tabindex="-1" aria-disabled="true">Previous</span>
+		</li>
+	  {% endif %}
+  
+	  {% for num in prods.paginator.page_range %}
+		{% if num == prods.number %}
+		  <li class="page-item active" aria-current="page">
+			<span class="page-link">{{ num }}</span>
+		  </li>
+		{% else %}
+		  <li class="page-item">
+			<a class="page-link" href="{% url 'store' %}?page={{ num }}">{{ num }}</a>
+		  </li>
+		{% endif %}
+	  {% endfor %}
+  
+	  {% if prods.has_next %}
+		<li class="page-item">
+		  <a class="page-link" href="{% url 'store' %}?page={{ prods.next_page_number }}">Next</a>
+		</li>
+	  {% else %}
+		<li class="page-item disabled">
+		  <span class="page-link">Next</span>
+		</li>
+	  {% endif %}
+	</ul>
+  </nav>
+  
+
+	</main> <!-- col.// -->
+
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- Bootstrap JS with Popper.js and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<!-- jQuery for search product -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script>
+var availableTags = [];
+
+$.ajax({
+  method: "GET",
+  url: "/product-list",
+  success: function (response) {
+    startAutocomplete(response);
+  }
+});
+
+function startAutocomplete(availableTags)
+{
+  $( "#searchproduct" ).autocomplete({
+    source: availableTags
+  });
+
+}
+</script> 
+</body>
+</html>

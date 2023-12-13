@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}My Orders{% endblock  %}
+{% block content %}
+<section class="intro">
+    <div class="bg-image h-150 mt-2" style="background-color: #f5f7fa;">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container ">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header card-shadow">
+                  <h3 class="mb-0" style="font-family: Arial, sans-serif;">My Orders</h3>
+                </div>
+                <div class="card-body p-0 ">
+                  <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+                    <table class="table table-bordered  mb-0 ">
+                      <thead style="background-color: #002d72;">
+                        <tr>
+                          <th scope="col">Order Date</th>
+                          <th scope="col">Tracking Number</th>
+                          <th scope="col">Total Price</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Details</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if total_items > 0 %}
+                            {% for item in orders %}
+                                <tr>
+                                    <td>{{ item.created_at }}</td>
+                                    <td>{{ item.tracking_no }}</td>
+                                    <td>Rs {{ item.total_price }}</td>
+                                    <td>{{ item.status }}</td>
+                                    <td><a href="{% url 'order-view' item.tracking_no %}" class="btn btn-info">View</a></td>
+                                    <td>
+                                        {% if item.status == 'Pending' %}
+                                            <input type="hidden" value="{{ item.id }}">
+                                            <button id="cancelOrderBtn" data-order-id="{{ item.id }}">Cancel Order</button>
+                                            {% else %}
+                                            <button>Order On Way</button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="6">
+                                    <h4>Your Order is empty</h4>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                    
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

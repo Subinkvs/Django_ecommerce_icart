@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="max-age=604800"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>GreatKart | One of the Biggest Online Shopping Platform</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
+
+    <!-- Bootstrap4 files-->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+
+    <!-- Font awesome 5 -->
+    <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
+
+    <!-- custom style -->
+    <link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+    <!-- custom javascript -->
+    <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        /// some script
+
+        // jquery ready start
+        $(document).ready(function() {
+            // jQuery code
+
+        });
+        // jquery end
+    </script>
+<!-- jQuery css for search product -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   
+<!-- Alertify CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<style>
+    .header-main {
+      position: sticky;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      z-index: 1000;
+    }
+  </style>
+
+</head>
+<body>
+<header class="section-header">
+   <section class="header-main border-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-md-3 col-6 ">
+                    <a href="{% url 'index' %}" class="brand-wrap">
+                        <img class="logo" src="{% static 'images/logo.png' %}">
+                    </a> <!-- brand-wrap.// -->
+                </div>
+                <div class="col-lg col-sm col-md col-6 flex-grow-0">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bars"></i> All category
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='t-shirt' %}">Tshirt</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='shirt' %}">Shirt</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='jeans' %}">Jeans</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='jacket' %}">Jacket</a></li>
+                    </ul>
+                    
+                    <!-- category-wrap -->
+                </div> <!-- col.// -->
+                <!-- <a href="./store.html" class="btn btn-outline-primary">Store</a> -->
+                <div class="col-lg col-md-6 col-sm-12 col">
+                    <form action="{% url 'searchproduct' %}" class="search" method="POST">
+                        {% csrf_token %}
+                          <div class="input-group w-100">
+                              <input type="search" required class="form-control" style="width:60%;" id="searchproduct" name="productsearch" placeholder="Search Product">
+  
+                              <div class="input-group-append">
+                                  <button class="btn btn-primary" type="submit">
+                                      <i class="fa fa-search"></i>
+                                  </button>
+                              </div>
+                          </div>
+                      </form> <!-- search-wrap .end// -->
+                </div> <!-- col.// -->
+                <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+                    <div class="d-flex justify-content-end mb-3 mb-lg-0">
+                        <div class="widget-header px-4">
+                            {% if request.user.is_authenticated %}
+                            <button class="title text-muted py-2 mt-2" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:white; border:none;">{{request.user}}</button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                              <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
+                              <li><a class="dropdown-item" href="{% url 'profile-view' %}">Profile</a></li>
+                              <li><a class="dropdown-item" href="{% url 'my-orders' %}">My Orders</a></li>
+                              <li><a class="dropdown-item" href="{% url 'logoutpage' %}">Logout</a></li> 
+                            </ul>
+                            {% else %}
+                            <!-- <small class="title text-muted ">Welcome</small> -->
+                            <div class = "pt-3 ">
+                                <a href="./signin.html"> Login</a> <span class="dark-transp"></span>
+                                <!-- <a href="./register.html"> Register</a> -->
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+                            <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+                            {% if total_quantity == 0 %}
+                              <span></span>
+                            {% else %}
+                            <span class="badge badge-pill badge-danger notify">{{total_quantity}}</span>
+                            {% endif %}
+                          </a>
+                          <a href="{% url 'wishlist' %}" class="widget-header pl-3 ml-3">
+                            <div class="icon icon-sm rounded-circle border"><i class="fa fa-heart"></i></div>
+                            {% if total_item == 0 %}
+                            <span ></span>
+                            {% else %}
+                            <span class="badge badge-pill notify" style="background-color: green; color: white;">{{total_item}}</span>
+                            {% endif %}
+                          </a>
+                    </div> <!-- widgets-wrap.// -->
+                </div> <!-- col.// -->
+            </div> <!-- row.// -->
+        </div> <!-- container.// -->
+    </section> <!-- header-main .// -->
+</header> <!-- section-header.// -->
+
+<!-- ========================= SECTION MAIN ========================= -->
+
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+    <div class="container">
+        <header class="section-heading">
+            <a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
+            <h3 class="section-title">{{ category_name|title }}</h3>
+        </header><!-- sect-heading -->
+        <div class="row">
+            {% for prod in products %}
+            <div class="col-md-3">
+                <div class="card card-product-grid">
+                    <a href="{% url 'productdetail' prod.id %}" class="img-wrap">
+                        <img src="{{ prod.image.url }}" >
+                    </a>
+                    <figcaption class="info-wrap">
+                        <a href="{% url 'productdetail' prod.id %}" class="title">{{ prod.title }}</a>
+                        <div class="price mt-1">Rs:{{ prod.price }}</div>
+                    </figcaption>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ========================= SECTION  END// ========================= -->
+
+<!-- ========================= FOOTER ========================= -->
+<!-- <footer class="section-footer border-top">
+    <div class="container">
+        <section class="footer-bottom border-top row">
+            <div class="col-md-2">
+                <p class="text-muted"> &copy; 2019 Company name </p>
+            </div>
+            <div class="col-md-8 text-md-center">
+                <span class="px-2">info@pixsellz.io</span>
+                <span class="px-2">+879-332-9375</span>
+                <span class="px-2">Street name 123, Avanue abc</span>
+            </div>
+            <div class="col-md-2 text-md-right text-muted">
+                <i class="fab fa-lg fa-cc-visa"></i>
+                <i class="fab fa-lg fa-cc-paypal"></i>
+                <i class="fab fa-lg fa-cc-mastercard"></i>
+            </div>
+        </section> -->
+    <!-- </div> -->
+<!-- </footer> -->
+<!-- ========================= FOOTER END // ========================= -->
+
+
+<!-- ========================= SECTION  END// ========================= -->
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="section-footer border-top">
+    <!-- <div class="container">
+        <section class="footer-bottom border-top row">
+            <div class="col-md-2">
+                <p class="text-muted"> &copy; 2019 Company name </p>
+            </div>
+            <div class="col-md-8 text-md-center">
+                <span class="px-2">info@pixsellz.io</span>
+                <span class="px-2">+879-332-9375</span>
+                <span class="px-2">Street name 123, Avanue abc</span>
+            </div>
+            <!-- <div class="col-md-2 text-md-right text-muted">
+                <i class="fab fa-lg fa-cc-visa"></i>
+                <i class="fab fa-lg fa-cc-paypal"></i>
+                <i class="fab fa-lg fa-cc-mastercard"></i>
+            </div> -->
+        </section>
+    </div>
+</footer>
+<!-- ========================= FOOTER END // ========================= -->
+<!-- jQuery for search product -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script>
+var availableTags = [];
+
+$.ajax({
+  method: "GET",
+  url: "/product-list",
+  success: function (response) {
+    startAutocomplete(response);
+  }
+});
+
+function startAutocomplete(availableTags)
+{
+  $( "#searchproduct" ).autocomplete({
+    source: availableTags
+  });
+
+}
+
+</script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+    
+    
+    ('{% for msg in messages %}')
+        alertify.set('notifier', 'position', 'bottom-right');
+        alertify.success('{{ msg }}');
+    ('{% endfor %}')
+</script>
+</body>
+</html>

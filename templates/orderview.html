@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}My Orders{% endblock  %}
+{% block content %}
+<section class="intro">
+    <div class="bg-image h-150 mt-2" style="background-color: #f5f7fa;">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container ">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header card-shadow">
+                  <h3 class="mb-0" style="font-family: Arial, sans-serif;">Order View
+                    <a href="{% url 'my-orders' %}" class="btn btn-warning float-end text-white"><i class="fa fa-reply pr-2"></i>Back</a>
+                  </h3> 
+                </div>
+                <div class="card-body p-0 ">
+                  <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+                    <div class="row pl-4 py-2">
+                        <div class="col-md-6">
+                            <h4>Shipping Details</h4>
+                            <hr>
+                            <label class="mt-2"><h6>First Name</h6></label>
+                            <div class="border p-1">{{order.firstname}}</div>
+                            <label class="mt-2"><h6>Last Name</h6></label>
+                            <div class="border p-1">{{order.lastname}}</div>
+                            <label class="mt-2"><h6>Email</h6></label>
+                            <div class="border p-1">{{order.email}}</div>
+                            <label class="mt-2"><h6>Contact No</h6></label>
+                            <div class="border p-1">{{order.phone}}</div>
+                            <label class="mt-2"><h6>Address</h6></label>
+                            <div class="border p-1">
+                                {{order.address}},
+                                {{order.city}},
+                                {{order.state}},
+                                {{order.country}}
+                            </div>
+                            <label class="mt-2"><h6>Zip Code</h6></label>
+                            <div class="border p-1">{{order.pincode}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-bordered  mb-0">
+                                <thead style="background-color: #002d72;">
+                                  <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Image</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {% for item in orderitems %}
+                                  <tr>
+                                    <td>{{item.product.name}}</td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>Rs {{item.price}}</td>
+                                    <td><a href="{% url 'productdetail' item.product.id %}"><img src="{{item.product.image.url}}" class="img-sm" alt="Product Image"></a></td>
+                                  </tr>
+                                  {% endfor %}                          
+                                </tbody>
+                              </table>
+                              <h4 class="mt-2">Grand Total : <span >Rs {{order.total_price}}</span></h4>
+                              <h6 class="border p-2"> Payment Mode: {{order.payment_mode}}</h6>
+                              <h6 class="border p-2"> Order Status: {{order.status}}</h6>
+                              <h6 class="border p-2"> Tracking No: {{order.tracking_no}}</h6>
+                            </div>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
