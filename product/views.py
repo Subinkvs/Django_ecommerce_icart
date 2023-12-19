@@ -368,12 +368,11 @@ class razorpaycheck(View):
             'total_price':total_price
         })
 
-# To add order complete       
+# To view order history      
 class order(View):
-    '''To add order complete '''
+    '''To view order with relevant status'''
     def get(self,request,*args, **kwargs):
-        orders = Order.objects.filter(user=request.user.id
-                                      ) 
+        orders = Order.objects.filter(user=request.user.id) 
         total_items = len(orders)
         cartitem = Cart.objects.filter(user=request.user.id)
         total_quantity = sum(item.product_qty for item in cartitem)
@@ -389,6 +388,7 @@ class order(View):
     
 # To view the order details
 class orderview(View):
+    '''To view order details '''
     def get(self,request,t_no,*args, **kwargs):
         order = Order.objects.filter(tracking_no=t_no).filter(user=request.user.id).first()
         orderitems = OrderItem.objects.filter(order=order)
@@ -406,12 +406,14 @@ class orderview(View):
  
 # To view profile for the user   
 class profileview(View):
+    '''To view the profile of the user'''
     def get(self,request,*args, **kwargs):
         profile = Profile.objects.filter(user=request.user).first()
         orders = Order.objects.filter(user=request.user.id)
         total_items = len(orders)
         cartitem = Cart.objects.filter(user=self.request.user.id)
         total_quantity = sum(item.product_qty for item in cartitem)
+        total_price = sum(item.product.price * item.product_qty for item in cartitem)
         wishlist = Wishlist.objects.filter(user=request.user.id)
         total_item =len(wishlist)
         context = {
@@ -419,21 +421,51 @@ class profileview(View):
             'orders':orders,
             'total_items':total_items,
             'total_quantity':total_quantity,
-            'total_item':total_item
+            'total_item':total_item,
+            'cartitem':cartitem,
+            'total_price':total_price,
+            'wishlist':wishlist
         }
         return render(request, 'dashboard.html', context)
     
 # To cancel your order from my orders
 class ordercancel(View):
+    '''To cancel the order in pending stage'''
     def post(self,request, order_id):
         order = get_object_or_404(Order, id=order_id, user=request.user)
         
         if order.status:
             order.status = 'Order Cancelled'
             order.delete()
-            return JsonResponse({'status': 'Your Order Deleted Successfully'})
+            return JsonResponse({'status': 'Your Order Cancelled Successfully'})
         return JsonResponse({'status': 'Cancellation not allowed'})
       
+# To view order history from profile page
+class profileorder(View):
+    def get(self,request,*args, **kwargs):
+        orders = Order.objects.filter(user=request.user.id) 
+        total_items = len(orders)
+        cartitem = Cart.objects.filter(user=request.user.id)
+        total_quantity = sum(item.product_qty for item in cartitem)
+        wishlist = Wishlist.objects.filter(user=request.user.id)
+        total_item =len(wishlist)              
+        context = {
+            'orders':orders,
+            'total_item':total_item,
+            'total_quantity':total_quantity,
+            'total_items':total_items
+        }
         
-
+        return render(request, 'profileorder.html', context)
+ 
+# To view wishlist from profile page
+class profilewishlist(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            cartitem = Cart.objects.filter(user=self.request.user.id)
+            total_quantity = sum(item.product_qty for item in cartitem)
+            wishlist = Wishlist.objects.filter(user=request.user.id)
+            total_item =len(wishlist)
+            context = {'wishlist': wishlist, 'total_quantity': total_quantity,'total_item':total_item}
+        return render(request, 'profilewishlist.html', context)
         

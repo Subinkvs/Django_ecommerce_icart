@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}My Profile order{% endblock %}
+{% block content %}
+<section  class="section-conten padding-y bg ">
+	<div class="container">
+		<div class="row">
+		<aside class="col-md-3">
+			<!--   SIDEBAR   -->
+			<ul class="list-group ">
+				<a class="list-group-item" href="{% url 'profile-view' %}">My Profile</a>
+				<a href="{% url 'profileorder' %}"class="list-group-item active">Order history</a>
+			    <a href="{% url 'profilewishlist' %}" class="list-group-item">My Wishlist</a>
+				<!-- <a class="btn btn-light btn-block"  href="{% url 'logoutpage' %}"><i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> -->
+			</ul>
+			<br>
+			<a class="btn btn-light btn-block" href="{% url 'logoutpage' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+			<!--   SIDEBAR .//END   -->
+		</aside>
+        <section class="intro" style="width: 75%;">
+            <div class="bg-image h-150 mt-2" style="background-color: #f5f7fa;">
+              <div class="mask d-flex align-items-center h-100">
+                <div class="container ">
+                  <div class="row justify-content-center">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header card-shadow">
+                          <h3 class="mb-0" style="font-family: Arial, sans-serif;">Order History</h3>
+                        </div>
+                        <div class="card-body p-0 ">
+                          <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height:350px">
+                            <table class="table table-bordered  mb-0 ">
+                            {% if total_items > 0 %}
+                              <thead style="background-color: #002d72;">
+                                <tr>
+                                  <th scope="col">Order Date</th>
+                                  <th scope="col">Tracking Number</th>
+                                  <th scope="col">Total Price</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Details</th>
+                                  <th scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                                    {% for item in orders %}
+                                        <tr>
+                                            <td>{{ item.created_at }}</td>
+                                            <td>{{ item.tracking_no }}</td>
+                                            <td>Rs {{ item.total_price }}</td>
+                                            <td>{{ item.status }}</td>
+                                            <td><a href="{% url 'order-view' item.tracking_no %}" class="btn btn-info">View</a></td>
+                                            <td>
+                                                {% if item.status == 'Pending' %}
+                                                    <input type="hidden" value="{{ item.id }}">
+                                                    <button class="btn btn-danger" id="cancelOrderBtn" data-order-id="{{ item.id }}">Cancel Order</button>
+                                                    {% else %}
+                                                    <h6>Order On Way</h6>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="pl-2 py-4 ml-2"  style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                                    <h5 class="text-info">
+                                        "You haven't placed any orders yet."
+                                        <br>
+                                        "We can't wait to have you as a customer."
+                                    </h5>
+                                </div>
+                                <br>
+                                <br>
+                                <div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                                    <strong><p>Take a look at our products here</p></strong>
+                                </div>
+                                <br>
+                                <div style="justify-content: center; align-items: center; text-align: center;">
+                                    <a href="{% url 'index' %}" class="btn text-white bg-dark">Continue Shopping</a>
+
+                                </div>
+                                
+                                
+                                {% endif %}
+                            </tbody>
+                            
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          </div>
+          <section>
+
+{% endblock %}

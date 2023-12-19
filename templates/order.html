@@ -36,9 +36,9 @@
                                     <td>
                                         {% if item.status == 'Pending' %}
                                             <input type="hidden" value="{{ item.id }}">
-                                            <button id="cancelOrderBtn" data-order-id="{{ item.id }}">Cancel Order</button>
+                                            <button class="btn btn-danger" id="cancelOrderBtn" data-order-id="{{ item.id }}">Cancel Order</button>
                                             {% else %}
-                                            <button>Order On Way</button>
+                                            <h6>Order On Way</h6>
                                         {% endif %}
                                     </td>
                                 </tr>

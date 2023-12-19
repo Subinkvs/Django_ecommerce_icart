@@ -82,7 +82,7 @@ $(document).ready(function() {
 			  </ul>
 		</div>  <!-- category-wrap.// -->
 	</div> <!-- col.// -->
-	<a href="#" class="btn btn-outline-primary">Store</a>
+	<!-- <a href="#" class="btn btn-outline-primary">Store</a> -->
 	<div class="col-lg  col-md-6 col-sm-12 col">
 		<form action="{% url 'searchproduct' %}" class="search" method="POST">
 			{% csrf_token %}
@@ -177,7 +177,7 @@ $(document).ready(function() {
 	</article> <!-- filter-group .// -->
 
 	<!-- filtering based on size of the product  -->
-	<article class="filter-group">
+	<!-- <article class="filter-group">
 		<header class="card-header">
 			<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
 				<i class="icon-control fa fa-chevron-down"></i>
@@ -194,16 +194,16 @@ $(document).ready(function() {
             </div><!-- card-body.// -->
 		<!-- {% endfor %}
 		</div> --> 
-	</article> <!-- filter-group .// -->
+	<!-- </article> 
 
-	<!-- filtering based on price range of the product  -->
-	<article class="filter-group">
+	<filtering based on price range of the product  -->
+	<!-- <article class="filter-group">
 		<header class="card-header">
 			<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
 				<i class="icon-control fa fa-chevron-down"></i>
 				<!-- <h6 class="title">Price range </h6> -->
-			</a>
-		</header>
+			<!-- </a> -->
+		<!-- </header> -->
 		<div class="filter-content collapse show" id="collapse_3">
 			<div class="card-body">
 				
@@ -234,10 +234,10 @@ $(document).ready(function() {
 					</select> -->
 				</div>
 				</div> <!-- form-row.// -->
-				<button class="btn btn-block btn-primary">Apply</button>
+				<!-- <button class="btn btn-block btn-primary">Apply</button> -->
 			</div><!-- card-body.// -->
 		</div>
-	</article> <!-- filter-group .// -->
+	</article> 
 	
 </div> <!-- card.// -->
 
@@ -255,7 +255,7 @@ $(document).ready(function() {
 	{% for prod in prods %}
 	<div class="col-md-4">
 		<figure class="card card-product-grid">
-			<div class="img-wrap"> 
+			<div class="img-wrap" style="height: 350px;"> 
 				<a href="{% url 'productdetail' prod.id %}">
 					<img src="{{prod.image.url}}">
 				</a>

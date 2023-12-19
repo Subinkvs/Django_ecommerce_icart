@@ -55,6 +55,18 @@ $(document).ready(function() {
 	  z-index: 1000;
 	}
   </style>    
+<style>
+	/* Red */
+.danger {
+	border-color: #f44336;
+	color: red
+  }
+  
+  .danger:hover {
+	background: #f44336;
+	color: white;
+  }
+  </style>
 
 </head>
 <body>
@@ -79,7 +91,7 @@ $(document).ready(function() {
 						   </ul>
 						 <!-- category-wrap -->
 					 </div>
-					 <a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
+					 <!-- <a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a> -->
 					 <div class="col-lg col-md-6 col-sm-12 col">
 						 <form action="{% url 'searchproduct' %}" class="search" method="POST">
 							 {% csrf_token %}
@@ -201,8 +213,8 @@ $(document).ready(function() {
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right "> 
-		<button type="button" class="btn btn-danger delete-cart-item py-2 mt-2">Remove</button>
-    </td>
+		<button type="button" class="btn btn-danger delete-cart-item  py-2 mt-2" >Remove</button>
+	</td>
 </tr>
 {% endfor %}
 {% else %}
@@ -246,8 +258,8 @@ $(document).ready(function() {
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
-
 <!-- <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script> -->
+<!-- jQuery for cart buttons -->
 <script src="{% static '/js/custom.js' %}"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
@@ -285,5 +297,6 @@ function startAutocomplete(availableTags)
 
 }
 </script> 
+</div>
 </body>
 </html>

@@ -5,29 +5,26 @@
   
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-conten padding-y bg">
-
+<section  class="section-conten padding-y bg ">
 	<div class="container">
 		<div class="row">
 		<aside class="col-md-3">
 			<!--   SIDEBAR   -->
-			<ul class="list-group">
+			<ul class="list-group ">
 				<a class="list-group-item active" href="#">My Profile</a>
-				<a class="list-group-item" href="{% url 'my-orders' %}"> My Orders</a>
-			    <a class="list-group-item" href="{% url 'cart' %}">My Cart</a>
-				<a class="list-group-item" href="{% url 'wishlist' %}">My Wishlist</a>
-			   
-				<!-- <a class="list-group-item" href="#"> Received orders </a>   -->
+				<a href="{% url 'profileorder' %}"class="list-group-item">Order history</a> 
+			    <a href="{% url 'profilewishlist' %}" class="list-group-item">My Wishlist</a>
+				<!-- <a class="btn btn-light btn-block"  href="{% url 'logoutpage' %}"><i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> -->
 			</ul>
 			<br>
 			<a class="btn btn-light btn-block" href="{% url 'logoutpage' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
 			<!--   SIDEBAR .//END   -->
 		</aside>
-		<main class="col-md-9">
+		
+		<main class="col-md-9 ">
 			<article class="card">
 			<header class="card-header">
-				<strong class="d-inline-block mr-3">Logged in as:</strong>
-				<span>{{request.user}}</span>
+				<strong class="d-inline-block mr-3"><h4>Hello, {{request.user.first_name}}</h4></strong>
 			</header>
 			<div class="card-body">
 				<div class="row"> 
@@ -43,13 +40,27 @@
 						Pin Code: {{profile.pincode}}
 						 </p>
 					</div>
-					<div class="col-md-4">
-						<i class="fas fa-user-circle fa-3x float-end"></i>
+					<div class="col-md-4 float-right">
+						<div class="row pl-2 ">
+							<div class="col-md-8 ">
+								<h5>Total Orders :</h5>
+							</div>
 						
-						
+							<div class="col-md-8 " style="font-size: 16px; font-family:'Times New Roman', Times, serif">
+								{% if total_items > 0 %}
+								<h5 class="pl-4 text-info">{{total_items}}</h5>
+								{% else %}
+								<p>You haven't placed any orders yet.</p>
+								<p>We can't wait to have you as a customer.</p>
+								<div style="justify-content: center; align-items: center; text-align: center; font-family:Arial, Helvetica, sans-serif">
+                                <a href="{% url 'index' %}" class="btn text-white bg-dark">Continue Shopping</a>
+							    </div>
+								{% endif %}
+							</div>
+						</div>	
 					</div>
-				</div> <!-- row.// -->
-			</div> <!-- card-body .// -->
+				</div>
+			</div> 
 			<br>
 			<div>
 				<div class="card-body">
@@ -73,32 +84,12 @@
 							 <div class="form-group col-sm-6">
 								 <label>Phone</label>
 								 <input type="text" value="{{request.user.phonenumber}}" required  class="form-control"  name="phone" placeholder="Enter phone number">
-							 </div>
-							 <!-- <div class="form-group col-12">
-								 <label>Address</label>
-								 <textarea type="text"required  class="form-control" required  name="address" placeholder="Enter address"  style="height: 100px;">{{userprofile.address}}</textarea>
-							 </div>
-							 <div class="form-group col-sm-6">
-								 <label>City</label>
-								 <input type="text" value="{{userprofile.city}}" required  class="form-control"  name="city" placeholder="Enter City name">
-							 </div>
-							 <div class="form-group col-sm-6">
-								 <label>State</label>
-								 <input type="text" value="{{userprofile.state}}" required  class="form-control"  name="state" placeholder="Enter State name">
-							 </div>
-							 <div class="form-group col-sm-6">
-								 <label>Country</label>
-								 <input type="text" value="{{userprofile.country}}" required  class="form-control"  name="country" placeholder="Enter Country name">
-							 </div>
-							 <div class="form-group col-sm-6">
-								 <label>Pin Code</label>
-								 <input type="text" value="{{userprofile.pincode}}" required  class="form-control"  name="pincode" placeholder="Enter Pin Code">
-							 </div> -->
+							 </div>		
 						 </div> <!-- row.// -->	
 				 </form>
 
 				</div>
-			        <div class="row pl-2 ">
+			        <!-- <div class="row pl-2 ">
 						<div class="col-md-8">
 							<h5>Total Orders</h5>
 						</div>
@@ -107,38 +98,21 @@
 						<div class="col-md-8">
 							<h5 class="pl-4">{{total_items}}</h5>
 						</div>
-					</div>
-					
-				<!-- <tr>
-					<td>
-						<img src="../images/items/2.jpg" class="img-xs border">
-					</td>
-					<td> 
-						<p class="title mb-0">Another name goes here </p>
-						<var class="price text-muted">USD 15</var>
-					</td>
-					<td> Seller <br> ABC shop </td>
-					<td> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#" class="btn btn-light"> Details </a> </td>
-				</tr> -->
-				<!-- <tr>
-					<td>
-						<img src="../images/items/3.jpg" class="img-xs border">
-					</td>
-					<td> 
-						<p class="title mb-0">The name of the product  goes here </p>
-						<var class="price text-muted">USD 145</var>
-					</td>
-					<td> Seller <br> Wallmart </td>
-					<td> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#" class="btn btn-light"> Details </a> </td>
-				</tr> -->
+					</div> -->
 			</div> <!-- table-responsive .end// -->
 			</article> <!-- order-group.// --> 
 		</main>
 	</div> <!-- row.// -->
 	</div>
-	
-	
-	</section>
+</section>
+
+
 	<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- To view order modal  -->
+ <!-- Modal -->
+ 
+
+
+		
 {% endblock %}
 

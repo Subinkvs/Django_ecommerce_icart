@@ -23,6 +23,7 @@ urlpatterns = [
     path('order-view/<str:t_no>',orderview.as_view(), name='order-view'),
     path('profile-view',profileview.as_view(), name='profile-view'),
     path('orders/<int:order_id>/cancel/', ordercancel.as_view(), name='ordercancel'),
+    path('orderprofile', profileorder.as_view(), name='profileorder'),
+    path('orderwishlist', profilewishlist.as_view(), name='profilewishlist'),
     path('store', store.as_view(), name='store')
-
 ]

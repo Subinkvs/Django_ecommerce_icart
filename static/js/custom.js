@@ -41,6 +41,7 @@ jQuery(function(){
             },
             success: function (response) {
                 // window.location.reload(true)
+                
                 console.log(response)
                 alertify.success(response.status)
                
@@ -87,7 +88,8 @@ jQuery(function(){
                 csrfmiddlewaretoken: token
             },
             success: function () {
-                 window.location.reload()
+                
+                location.reload(true)
             }
         });
     });
