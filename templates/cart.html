@@ -158,6 +158,7 @@ $(document).ready(function() {
 <div class="row">
 	<aside class="col-lg-9">
 <div class="card cartdata">
+{% if cartitem %}
 <table class="table table-borderless table-shopping-cart">
 <thead class="text-muted">
 <tr class="small text-uppercase ">
@@ -168,7 +169,6 @@ $(document).ready(function() {
 </tr>
 </thead>
 <tbody>
-	{% if cartitem %}
 	{% for item in cartitem %}
 <tr class="product_data">
 	
@@ -218,7 +218,24 @@ $(document).ready(function() {
 </tr>
 {% endfor %}
 {% else %}
-<h4>Your cart is empty</h4>
+<div class="pl-2 py-4 ml-2"  style="display: flex; justify-content: center; align-items: center; text-align: center; height:250px;">
+	<h5 class="text-info">
+		"You haven't placed any orders yet."
+		<br>
+		"We can't wait to have you as a customer."
+	</h5>
+</div>
+<br>
+<br>
+<div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+	<strong><p>Take a look at our products here</p></strong>
+</div>
+<br>
+<div style="justify-content: center; align-items: center; text-align: center;">
+	<a href="{% url 'index' %}" class="btn text-white bg-dark my-2 mb-2">Continue Shopping</a>
+
+</div>
+
 {% endif %}
  </td>
 	
@@ -243,9 +260,11 @@ $(document).ready(function() {
 			{% if total_quantity > 0 %}
 			<a href="{% url 'checkoutpage' %}" class="btn btn-primary btn-block"> Checkout </a>
 			{% else %}
-			<a href="" class="btn btn-danger btn-block">Your Cart is empty </a>
+			<a href="" class="btn btn-danger btn-block">No items to display</a>
 			{% endif %}
-			<a href="{% url 'index' %}" class="btn btn-light btn-block">Continue Shopping</a>
+			{% if cartitem == 0 %}
+			<a href="{% url 'index' %}" class="btn btn-light btn-block"></a>
+			{% endif %}
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 
