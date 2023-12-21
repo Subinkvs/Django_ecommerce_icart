@@ -25,5 +25,6 @@ urlpatterns = [
     path('orders/<int:order_id>/cancel/', ordercancel.as_view(), name='ordercancel'),
     path('orderprofile', profileorder.as_view(), name='profileorder'),
     path('orderwishlist', profilewishlist.as_view(), name='profilewishlist'),
-    path('store', store.as_view(), name='store')
+    path('store', store.as_view(), name='store'),
+    path('applycoupon', applycoupon.as_view(), name='applycoupon')
 ]

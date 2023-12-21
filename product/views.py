@@ -8,6 +8,7 @@ from django.contrib import messages
 from accounts.models import User
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.views import View
+from django.utils import timezone
 import random
 #  Create your views here. 
 
@@ -126,14 +127,34 @@ class cart(View):
         if request.user.is_authenticated:
             cartitem = Cart.objects.filter(user=request.user.id).order_by('-created_at')
             total_quantity = sum(item.product_qty for item in cartitem)
-            total_price = sum(item.product.price * item.product_qty for item in cartitem)
+            sub_total = sum(item.product.price * item.product_qty for item in cartitem)
+            
+            # Retrieve applied coupon information from the session
+            coupon_code =request.session.get('coupon_code')
+            discount = request.session.get('discount', 0)
+            
+            # Calculate total price after applying the coupon discount
+            total_price = sub_total - discount
+            
+           
+            
+            
             wishlist = Wishlist.objects.filter(user=request.user.id)
             total_item =len(wishlist)
 
-            context = {'cartitem': cartitem, 'total_quantity': total_quantity, 'total_price': total_price,'total_item':total_item}
+            context = {'cartitem': cartitem, 
+                       'total_quantity': total_quantity, 
+                       'sub_total': sub_total,
+                       'total_item':total_item, 
+                       'discount':discount, 
+                       'total_price':total_price,
+                       'coupon_code':coupon_code
+                       }
             return render(request, 'cart.html', context)
         else:
              return redirect('loginpage')
+         
+    
          
 # To update the product quantity in the cart
 class updatecart(View):
@@ -224,7 +245,14 @@ class checkoutpage(View):
                 item.delete()
 
         cartitems = Cart.objects.filter(user=request.user)
-        total_price = sum(item.product.price * item.product_qty for item in cartitems)
+        sub_total = sum(item.product.price * item.product_qty for item in cartitems)
+        
+        # Retrieve applied coupon information from the session
+        discount = request.session.get('discount', 0)
+        
+        # Calculate total price after applying the coupon discount
+        total_price = sub_total - discount
+        
         
         userprofile = Profile.objects.filter(user=request.user).first()
         wishlist = Wishlist.objects.filter(user=request.user.id)
@@ -361,8 +389,9 @@ class razorpaycheck(View):
     def get(self,request,*args, **kwargs):
         cart = Cart.objects.filter(user=request.user)
         total_price = 0
+        discount = request.session.get('discount', 0)
         for item in cart:
-            total_price = total_price + item.product.price * item.product_qty
+            total_price = (total_price + item.product.price * item.product_qty) - discount
         
         return JsonResponse({
             'total_price':total_price
@@ -377,12 +406,14 @@ class order(View):
         cartitem = Cart.objects.filter(user=request.user.id)
         total_quantity = sum(item.product_qty for item in cartitem)
         wishlist = Wishlist.objects.filter(user=request.user.id)
-        total_item =len(wishlist)              
+        total_item =len(wishlist)
+        discount = request.session.get('discount', 0)            
         context = {
             'orders':orders,
             'total_item':total_item,
             'total_quantity':total_quantity,
-            'total_items':total_items
+            'total_items':total_items,
+            'discount':discount
         }
         return render(request,'order.html', context)
     
@@ -435,7 +466,6 @@ class ordercancel(View):
         order = get_object_or_404(Order, id=order_id, user=request.user)
         
         if order.status:
-            order.status = 'Order Cancelled'
             order.delete()
             return JsonResponse({'status': 'Your Order Cancelled Successfully'})
         return JsonResponse({'status': 'Cancellation not allowed'})
@@ -468,4 +498,29 @@ class profilewishlist(View):
             total_item =len(wishlist)
             context = {'wishlist': wishlist, 'total_quantity': total_quantity,'total_item':total_item}
         return render(request, 'profilewishlist.html', context)
+ 
+    
+# To apply coupon code and discount price in shopping cart page
+class applycoupon(View):
+    def post(self, request, *args, **kwargs):
+        coupon_code = request.POST.get('coupon_code')
+
+        try:
+            coupon = Coupon.objects.get(code=coupon_code)
+        except Coupon.DoesNotExist:
+            messages.error(request, 'The coupon code does not exist.')
+            return redirect('cart')
+
+        if coupon.valid_from <= timezone.now() <= coupon.valid_to:
+            request.session['coupon_code'] = coupon_code
+            request.session['discount'] = coupon.discount
+            
+        else:
+            messages.error(request, 'The coupon code is not valid.')
+
+        return redirect('cart')
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, 'cart.html')
+            
         

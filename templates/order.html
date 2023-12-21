@@ -30,7 +30,7 @@
                                 <tr>
                                     <td>{{ item.created_at }}</td>
                                     <td>{{ item.tracking_no }}</td>
-                                    <td>Rs {{ item.total_price }}</td>
+                                    <td>Rs {{ item.total_price}}</td>
                                     <td>{{ item.status }}</td>
                                     <td><a href="{% url 'order-view' item.tracking_no %}" class="btn btn-info">View</a></td>
                                     <td>

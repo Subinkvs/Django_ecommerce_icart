@@ -250,15 +250,48 @@ $(document).ready(function() {
 		<div class="card">
 		<div class="card-body">
 			<dl class="dlist-align">
-			  <dt>Total price:</dt>
-			  <dd class="text-right">Rs {{total_price}}</dd>
+			  <dt>Sub Total:</dt>
+			  <dd class="ml-2">Rs {{sub_total|floatformat:"0" }}</dd>
+			</dl>
+			<dl class="dlist-align">
+				<dt>Free Delivery :</dt>
+				<dd class=" ml-2">Rs 0.00</dd>
+			</dl>
+			<dl class="dlist-align">
+				<dt>Discount :</dt>
+				{% if total_quantity > 0 %}
+				<dd class=" ml-2">Rs {{discount}}</dd>
+				{% else %}
+				<dd class=" ml-2">Rs 0</dd>
+				{% endif %}
 			</dl>
 			<hr>
+			<dl class="dlist-align">
+				<dt>Total Price :</dt>
+				{% if total_quantity > 0 %}
+				<dd class=" ml-2">Rs {{total_price|floatformat:"0"}}</dd>
+				{% else %}
+				<dd class=" ml-2">Rs 0</dd>
+				{% endif %}
+			</dl>
+			<br>
+			<button class="btn btn-block btn-primary" data-toggle="collapse" data-target="#demo">Apply Promo Code</button>
+				<div id="demo" class="collapse">
+					<form action="{% url 'applycoupon' %}" method="POST">
+					{% csrf_token %}
+					  <!-- Coupon code input field -->
+                      <input type="text" class="coupon-input py-2  mt-2" required class="form-control" name="coupon_code" style="width: 240px; text-align: center;" placeholder="Enter coupon code">
+					  <!-- Apply button -->
+					  <button class="apply-button btn btn-block btn-success mt-2" type="submit">Apply</button>
+					</form>
+				</div>
+			<br>
 			<p class="text-center mb-3">
 				<img src="{% static './images/misc/payments.png' %}" height="26">
 			</p>
 			{% if total_quantity > 0 %}
 			<a href="{% url 'checkoutpage' %}" class="btn btn-primary btn-block"> Checkout </a>
+			<a href="{% url 'index' %}" class="btn text-white bg-dark  btn-block"> Continue Shopping </a>
 			{% else %}
 			<a href="" class="btn btn-danger btn-block">No items to display</a>
 			{% endif %}
