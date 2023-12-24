@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,HttpResponse
+from django.shortcuts import render, redirect,HttpResponse,reverse
 from .models import *
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
@@ -133,8 +133,15 @@ class cart(View):
             coupon_code =request.session.get('coupon_code')
             discount = request.session.get('discount', 0)
             
-            # Calculate total price after applying the coupon discount
-            total_price = sub_total - discount
+           
+           # Check if the discount is applied (coupon_code is present)
+            if coupon_code:
+                # Calculate total price after applying the coupon discount
+                total_price = sub_total - discount
+            else:
+                # If no coupon is applied, total price is the same as sub-total and discount is zero
+                total_price = sub_total
+                discount = 0
             
            
             
@@ -240,6 +247,7 @@ class checkoutpage(View):
         rawcart = Cart.objects.filter(user=request.user)
         total_quantity = sum(item.product_qty for item in rawcart)
         
+        
         for item in rawcart:
             if item.product_qty > item.product.quantity:
                 item.delete()
@@ -298,7 +306,14 @@ class placeorder(View):
         neworder.payment_mode = request.POST.get('payment_mode')
         neworder.payment_id = request.POST.get('payment_id')
         cart = Cart.objects.filter(user=request.user)
-        cart_total_price = sum(item.product.price * item.product_qty for item in cart)
+        discount = request.session.get('discount', 0)
+        cart_total_price = sum(item.product.price * item.product_qty for item in cart) - discount
+        
+        # Clear coupon-related session variables after placing the order
+        if 'coupon_code' in request.session:
+            del request.session['coupon_code']
+        if 'discount' in request.session:
+            del request.session['discount']
         
         neworder.total_price = cart_total_price
         trackno = 'Hello' + str(random.randint(1111111, 9999999))
@@ -388,10 +403,9 @@ class razorpaycheck(View):
     '''To add Razorpaycheck payment '''
     def get(self,request,*args, **kwargs):
         cart = Cart.objects.filter(user=request.user)
-        total_price = 0
         discount = request.session.get('discount', 0)
-        for item in cart:
-            total_price = (total_price + item.product.price * item.product_qty) - discount
+        total_price = sum(item.product.price * item.product_qty for item in cart) - discount
+        
         
         return JsonResponse({
             'total_price':total_price
@@ -502,25 +516,26 @@ class profilewishlist(View):
     
 # To apply coupon code and discount price in shopping cart page
 class applycoupon(View):
+    template_name = 'cart.html'
+
     def post(self, request, *args, **kwargs):
         coupon_code = request.POST.get('coupon_code')
 
         try:
-            coupon = Coupon.objects.get(code=coupon_code)
+            coupon = Coupon.objects.get(code__iexact=coupon_code)
         except Coupon.DoesNotExist:
             messages.error(request, 'The coupon code does not exist.')
-            return redirect('cart')
+            return redirect(reverse('cart'))
 
         if coupon.valid_from <= timezone.now() <= coupon.valid_to:
             request.session['coupon_code'] = coupon_code
             request.session['discount'] = coupon.discount
-            
+            messages.success(request, 'Your coupon applied successfully.')
         else:
             messages.error(request, 'The coupon code is not valid.')
 
-        return redirect('cart')
-    
+        return redirect(reverse('cart'))
+
     def get(self, request, *args, **kwargs):
-        return render(request, 'cart.html')
-            
+        return render(request, self.template_name)
         
