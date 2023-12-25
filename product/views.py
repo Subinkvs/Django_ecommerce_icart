@@ -349,7 +349,7 @@ class placeorder(View):
 class store(View):
     '''To see all products using pagination'''
     def get(self, request):
-        prods = MenClothing.objects.filter(is_featured=True).order_by('image')
+        prods = MenClothing.objects.all().order_by('image')
         cartitem = Cart.objects.filter(user=request.user.id)
         total_quantity = sum(item.product_qty for item in cartitem)
         wishlist = Wishlist.objects.filter(user=request.user.id)
@@ -373,7 +373,7 @@ class store(View):
 class productlist(View):
     ''' To list product in the searchbar '''
     def get(self, request, *args, **kwargs):
-        products = MenClothing.objects.filter(is_featured=True).values_list('name', flat=True)
+        products = MenClothing.objects.all().values_list('name', flat=True)
         productList = list(products)
         return JsonResponse(productList, safe=False)
 
@@ -486,6 +486,7 @@ class ordercancel(View):
       
 # To view order history from profile page
 class profileorder(View):
+    '''To view order history from profile page'''
     def get(self,request,*args, **kwargs):
         orders = Order.objects.filter(user=request.user.id) 
         total_items = len(orders)
@@ -504,6 +505,7 @@ class profileorder(View):
  
 # To view wishlist from profile page
 class profilewishlist(View):
+    '''To view wishlist from profile page'''
     def get(self, request):
         if request.user.is_authenticated:
             cartitem = Cart.objects.filter(user=self.request.user.id)
@@ -516,6 +518,7 @@ class profilewishlist(View):
     
 # To apply coupon code and discount price in shopping cart page
 class applycoupon(View):
+    '''To apply coupon code and discount price in shopping cart page'''
     template_name = 'cart.html'
 
     def post(self, request, *args, **kwargs):
@@ -524,7 +527,7 @@ class applycoupon(View):
         try:
             coupon = Coupon.objects.get(code__iexact=coupon_code)
         except Coupon.DoesNotExist:
-            messages.error(request, 'The coupon code does not exist.')
+            messages.error(request, 'Please check the coupon code..it does not exist.')
             return redirect(reverse('cart'))
 
         if coupon.valid_from <= timezone.now() <= coupon.valid_to:
@@ -532,7 +535,7 @@ class applycoupon(View):
             request.session['discount'] = coupon.discount
             messages.success(request, 'Your coupon applied successfully.')
         else:
-            messages.error(request, 'The coupon code is not valid.')
+            messages.error(request, 'The coupon code is not valid or expired.')
 
         return redirect(reverse('cart'))
 

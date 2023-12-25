@@ -24,7 +24,7 @@
                     <div class="col-12">
                       <div class="card">
                         <div class="card-header card-shadow">
-                          <h3 class="mb-0" style="font-family: Arial, sans-serif;">Order History</h3>
+                          <h3 class="mb-0" style="font-family: Arial, sans-serif; font-weight: 100;">Welcome {{ request.user.first_name }}! ... Here Is Your Order History</h3>
                         </div>
                         <div class="card-body p-0 ">
                           <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height:350px">
@@ -53,6 +53,8 @@
                                                 {% if item.status == 'Pending' %}
                                                     <input type="hidden" value="{{ item.id }}">
                                                     <button class="btn btn-danger" id="cancelOrderBtn" data-order-id="{{ item.id }}">Cancel Order</button>
+                                                {% elif item.status == 'Completed' %}
+                                                    <h6>Completed</h6>
                                                     {% else %}
                                                     <h6>Order On Way</h6>
                                                 {% endif %}
