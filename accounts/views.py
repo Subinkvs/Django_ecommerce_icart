@@ -66,8 +66,9 @@ class activateEmail(View):
 
 # To render the landing page of the project
 class home(View):
-    template_name = 'index.html'
     '''To render the landing page of the project '''
+    template_name = 'index.html'
+    
     def get_context_data(self,request):
         prods = MenClothing.objects.filter(is_featured=True)
         bannerimage = BannerImage.objects.all()
@@ -94,8 +95,9 @@ class home(View):
 
 # signup page for user registeration with validation
 class signuppage(View):
-    template_name = 'register.html'
     '''signup page for user registeration with validation'''
+    template_name = 'register.html'
+   
     def get(self, request):
         form = CustomUserForm()
         context = {'form': form}
@@ -117,8 +119,9 @@ class signuppage(View):
 
 # loginpage for the user     
 class loginpage(View):
-    template_name = 'signin.html'
     '''loginpage for the user '''
+    template_name = 'signin.html'
+    
     def get(self, request):
         if request.user.is_authenticated:
             messages.warning(request, "You are already logged in")

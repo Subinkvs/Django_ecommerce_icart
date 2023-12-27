@@ -150,11 +150,13 @@ $(document).ready(function() {
 	 </header>
 
 
-<section class="section-content padding-y bg">
+<section class="section-content padding-y bg" style="width: 1519.2px; height: 661px;">
 <div class="container ">
 
 <!-- ============================ COMPONENT 1 ================================= -->
-
+<div class="pb-2">
+    <h2 style="font-weight: 300;">Shopping Cart</h2>
+</div>
 <div class="row">
 	<aside class="col-lg-9">
 <div class="card cartdata">
@@ -209,7 +211,7 @@ $(document).ready(function() {
 	</td>
 	<td> 
 		<div class="price-wrap py-4"> 
-			<var class="price">Rs {{ item.product.price|floatformat:"0" }}</var> 
+			<var class="price">₹ {{ item.product.price|floatformat:"0" }}</var> 
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right "> 
@@ -251,30 +253,38 @@ $(document).ready(function() {
 		<div class="card-body">
 			<dl class="dlist-align">
 			  <dt>Sub Total:</dt>
-			  <dd class="ml-2">Rs {{sub_total|floatformat:"0" }}</dd>
+			  <dd class="ml-2">₹ {{sub_total|floatformat:"0" }}</dd>
 			</dl>
+			{% if sub_total >= 5000 %}
 			<dl class="dlist-align">
 				<dt>Free Delivery :</dt>
-				<dd class=" ml-2">Rs 0.00</dd>
+				<dd class=" ml-2">₹ 0.00</dd>
 			</dl>
+			{% else %}
+			<dl class="dlist-align">
+				<dt>Shipping:</dt>
+				<dd class=" ml-2">₹ {{delivary_charge}} +</dd>
+			</dl>
+			{% endif %}
 			<dl class="dlist-align">
 				<dt>Discount :</dt>
 				{% if total_quantity > 0 %}
-				<dd class=" ml-2">Rs {{discount}}</dd>
+				<dd class=" ml-2">₹ {{discount}} -</dd>
 				{% else %}
-				<dd class=" ml-2">Rs 0</dd>
+				<dd class=" ml-2">₹ 0</dd>
 				{% endif %}
 			</dl>
 			<hr>
 			<dl class="dlist-align">
 				<dt>Total Price :</dt>
 				{% if total_quantity > 0 %}
-				<dd class=" ml-2">Rs {{total_price|floatformat:"0"}}</dd>
+				<dd class=" ml-2">₹ {{total_price|floatformat:"0"}}</dd>
 				{% else %}
-				<dd class=" ml-2">Rs 0</dd>
+				<dd class=" ml-2">₹ 0</dd>
 				{% endif %}
 			</dl>
 			<br>
+			{% if total_quantity > 0 %}
 			<button class="btn btn-block btn-primary" data-toggle="collapse" data-target="#demo">Apply Promo Code</button>
 				<div id="demo" class="collapse">
 					<form action="{% url 'applycoupon' %}" method="POST">
@@ -285,6 +295,9 @@ $(document).ready(function() {
 					  <button class="apply-button btn btn-block btn-success mt-2" type="submit">Apply</button>
 					</form>
 				</div>
+			{% else %}
+			<div></div>
+			{% endif %}
 			<br>
 			<p class="text-center mb-3">
 				<img src="{% static './images/misc/payments.png' %}" height="26">
@@ -309,6 +322,17 @@ $(document).ready(function() {
 
 </div> <!-- container .//  -->
 </section>
+<footer class="section-footer border-top padding-y" style="background-color: #f8f9fa;">
+    <div class="container">
+        <p class="float-md-right">
+            &copy; Copyright 2023 Icart
+        </p>
+        <p>
+            <a href="#">Terms and conditions</a>
+        </p>
+    </div>
+    <!-- //container -->
+</footer>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 <!-- <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script> -->
 <!-- jQuery for cart buttons -->
@@ -349,6 +373,7 @@ function startAutocomplete(availableTags)
 
 }
 </script> 
-</div>
+
+
 </body>
 </html>

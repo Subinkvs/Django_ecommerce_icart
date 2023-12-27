@@ -52,13 +52,13 @@
                                   <tr>
                                     <td>{{item.product.name}}</td>
                                     <td>{{item.quantity}}</td>
-                                    <td>Rs {{item.price}}</td>
+                                    <td>₹ {{item.price}}</td>
                                     <td><a href="{% url 'productdetail' item.product.id %}"><img src="{{item.product.image.url}}" class="img-sm" alt="Product Image"></a></td>
                                   </tr>
                                   {% endfor %}                          
                                 </tbody>
                               </table>
-                              <h4 class="mt-2">Grand Total : <span >Rs {{order.total_price}}</span></h4>
+                              <h4 class="mt-2">Grand Total : <span >₹ {{order.total_price}}</span></h4>
                               <h6 class="border p-2"> Payment Mode: {{order.payment_mode}}</h6>
                               <h6 class="border p-2"> Order Status: {{order.status}}</h6>
                               <h6 class="border p-2"> Tracking No: {{order.tracking_no}}</h6>

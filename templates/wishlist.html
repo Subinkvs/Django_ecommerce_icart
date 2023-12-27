@@ -141,11 +141,13 @@ $(document).ready(function() {
 </header> <!-- section-header.// -->
 
 
-<section class="section-content padding-y bg">
+<section class="section-content padding-y bg" style="width: 1519.2px; height: 661px;">
 <div class="container ">
 
 <!-- ============================ COMPONENT 1 ================================= -->
-
+<div class="pb-2">
+    <h2 style="font-weight: 300;">Shopping Wishlist</h2>
+</div>
 <div class="row ">
 	<aside class="col-lg-9">
 <div class="card  cartdata">
@@ -181,7 +183,7 @@ $(document).ready(function() {
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">Rs {{item.product.price|floatformat:"0"}}</var> 
+			<var class="price">₹ {{item.product.price|floatformat:"0"}}</var> 
 			
 		</div> <!-- price-wrap .// -->
 	</td>
@@ -244,6 +246,16 @@ $(document).ready(function() {
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
+<footer class="section-footer border-top padding-y" style="background-color: #f8f9fa; margin: bottom 0;">
+	<div class="container">
+		<p class="float-md-right">
+			&copy; Copyright 2023 Icart
+		</p>
+		<p>
+			<a href="#">Terms and conditions</a>
+		</p>
+	</div>
+</footer>
 
 <!-- <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script> -->
 <script src="{% static '/js/custom.js' %}"></script>

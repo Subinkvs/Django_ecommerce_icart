@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}My Profile order{% endblock %}
 {% block content %}
-<section  class="section-content padding-y bg ">
+<section class="section-content padding-y bg" style="width: 1519.2px; height: 661px;">
 	<div class="container">
 		<div class="row">
 		<aside class="col-md-3">
@@ -16,12 +16,12 @@
 			<a class="btn btn-light btn-block" href="{% url 'logoutpage' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
 			<!--   SIDEBAR .//END   -->
 		</aside>
-        <section class="intro" style="width: 75%;">
-            <div class="bg-image h-150 " style="background-color: #f5f7fa;">
+        <section class="intro" style="width: 75%; height: 700px; margin-bottom:0px">
+            <div class="bg-image h-150" style="background-color: #f5f7fa;">
               <div class="mask d-flex align-items-center h-100">
                 <div class="container ">
                   <div class="row justify-content-center">
-                    <div class="col-12">
+                    <div class="col-12" >
                       <div class="card">
                         <div class="card-header card-shadow">
                           <h3 class="mb-0" style="font-family: Arial, sans-serif; font-weight: 100;">Welcome {{ request.user.first_name }}! ... Here Is Your Order History</h3>

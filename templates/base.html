@@ -41,7 +41,6 @@
         });
         // jquery end
     </script>
-
 <!-- jQuery css for search product -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -58,7 +57,6 @@
     z-index: 1000;
   }
 </style>
-
 <style>
 	html,
 body,
@@ -94,9 +92,8 @@ thead {
 }
 </style>
 <style>
-  /* Add your custom styles here */
   .mt-2 {
-    margin-top: 10px; /* Adjust the top margin as needed */
+    margin-top: 10px;
   }
 </style>
 </head>
@@ -121,17 +118,14 @@ thead {
                         <li><a class="dropdown-item" href="{% url 'category-view' category_name='Jeans' %}">Jeans</a></li>
                         <li><a class="dropdown-item" href="{% url 'category-view' category_name='Jacket' %}">Jacket</a></li>
                     </ul>
-                    
-                    </div>
+                  </div>
                       <!-- category-wrap -->
                   </div> <!-- col.// -->
-                  <!-- <a href="./store.html" class="btn btn-outline-primary">Store</a> -->
                   <div class="col-lg col-md-6 col-sm-12 col">
                       <form action="{% url 'searchproduct' %}" class="search" method="POST">
                         {% csrf_token %}
                           <div class="input-group w-100">
                               <input type="search" required class="form-control" style="width:60%;" id="searchproduct" name="productsearch" placeholder="Search Product">
-  
                               <div class="input-group-append">
                                   <button class="btn btn-primary" type="submit">
                                       <i class="fa fa-search"></i>
@@ -152,15 +146,12 @@ thead {
                                 <li><a class="dropdown-item" href="{% url 'logoutpage' %}">Logout</a></li> 
                               </ul>
                               {% else %}
-                              <!-- <small class="title text-muted ">Welcome</small> -->
                               <div class = "pt-3 ">
                                   <a href="./signin.html"> Login</a> <span class="dark-transp"></span>
-                                  <!-- <a href="./register.html"> Register</a> -->
                               </div>
                               {% endif %}
                           </div>
-                        
-                          <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+                            <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
                             <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
                             {% if total_quantity == 0 %}
                               <span></span>
@@ -190,27 +181,19 @@ thead {
 {% block content %}
   
 {% endblock %}
+<!-- footer -->
 
-<!-- ========================= SECTION MAIN ========================= -->
-
- 
-<!-- ========================= SECTION MAIN END// ========================= -->
-
-<!-- ========================= SECTION  ========================= -->
-
-
-
-<!-- ========================= SECTION  END// ========================= -->
-
-<!-- ========================= FOOTER ========================= -->
-<!-- Remove the container if you want to extend the Footer to full width. -->
-<!-- Remove the container if you want to extend the Footer to full width. -->
-<!-- <div class="container my-5"> -->
-    <!-- Footer -->
-   
-    <!-- Footer -->
-  <!-- </div> -->
-  <!-- End of .container -->
+    <footer class="section-footer border-top padding-y" style="background-color: #f8f9fa; margin: bottom 0;">
+      <div class="container">
+          <p class="float-md-right">
+              &copy; Copyright 2023 Icart
+          </p>
+          <p>
+              <a href="#">Terms and conditions</a>
+          </p>
+      </div>
+  </footer>
+  
 <!-- ========================= FOOTER END // ========================= -->
 <!-- Ajax for order cancel  -->
 <script src="{% static '/js/order.js' %}"></script>
@@ -234,7 +217,6 @@ function startAutocomplete(availableTags)
   });
 }
 </script>
-
 <!-- jQuery for cart buttons -->
 <script src="{% static '/js/custom.js' %}"></script>
 <!-- jQuery for alertify messages -->
@@ -246,5 +228,6 @@ function startAutocomplete(availableTags)
         alertify.success('{{ msg }}');
     ('{% endfor %}')
 </script>
+</div>
 </body>
 </html>

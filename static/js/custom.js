@@ -89,7 +89,7 @@ jQuery(function(){
             },
             success: function () {
                 
-                location.reload(true)
+               window.location.reload(true)
             }
         });
     });

@@ -128,23 +128,43 @@ class cart(View):
             cartitem = Cart.objects.filter(user=request.user.id).order_by('-created_at')
             total_quantity = sum(item.product_qty for item in cartitem)
             sub_total = sum(item.product.price * item.product_qty for item in cartitem)
+            delivary_charge = 0
+        
             
             # Retrieve applied coupon information from the session
             coupon_code =request.session.get('coupon_code')
             discount = request.session.get('discount', 0)
             
-           
-           # Check if the discount is applied (coupon_code is present)
-            if coupon_code:
-                # Calculate total price after applying the coupon discount
+            # if sub_total >= 5000:
+            #     messages.success(request, "Your Shipping charge is free now..!")
+            
+            # Delivary charge is only applied when cart is not empty
+            if total_quantity > 0:
+                delivary_charge = 50
+            
+            if sub_total <= 5000 and total_quantity > 0 :
+                total_price = sub_total + delivary_charge
+                
+                   
+            # Check if the discount is applied (coupon_code is present)
+            # Calculate total price after applying the coupon discount with delivary charge
+            if coupon_code and sub_total <= 5000:      
+                total_price = (sub_total - discount) + delivary_charge
+             
+            # If coupon is applied, sub_total is greater than 5000 Rs.
+            # Calculate total price after applying the coupon discount
+            elif coupon_code and sub_total >= 5000:
                 total_price = sub_total - discount
+                
+            # If no coupon is applied, check sub_total is less than or equal to 5000 Rs.
+            # Calculate total price with devilary charge and discount is zero.    
+            elif sub_total <= 5000:
+                total_price = sub_total + delivary_charge
+                discount = 0  
             else:
-                # If no coupon is applied, total price is the same as sub-total and discount is zero
                 total_price = sub_total
                 discount = 0
-            
-           
-            
+                
             
             wishlist = Wishlist.objects.filter(user=request.user.id)
             total_item =len(wishlist)
@@ -155,7 +175,8 @@ class cart(View):
                        'total_item':total_item, 
                        'discount':discount, 
                        'total_price':total_price,
-                       'coupon_code':coupon_code
+                       'coupon_code':coupon_code,
+                       'delivary_charge':delivary_charge
                        }
             return render(request, 'cart.html', context)
         else:
@@ -176,6 +197,7 @@ class updatecart(View):
             return JsonResponse({'status': 'Updated Successfully'})
         return redirect('index')
 
+
 # To delete the product added in the cart
 class deletecartitem(View):
     '''To delete the product added in the cart'''
@@ -184,8 +206,16 @@ class deletecartitem(View):
         if Cart.objects.filter(user=request.user, product_id=prod_id).exists():
             cartitem = Cart.objects.get(product_id=prod_id, user=request.user)
             cartitem.delete()
+        
+        # Clear coupon-related session variables after placing the order
+        if 'coupon_code' in request.session:
+            del request.session['coupon_code']
+        if 'discount' in request.session:
+            del request.session['discount']  
+             
             return JsonResponse({'status': 'Deleted Successfully'})
         return redirect('index')
+
 
 # To view the Wishlist page
 class wishlist(View):
@@ -200,6 +230,7 @@ class wishlist(View):
             return render(request, 'wishlist.html', context)
         else:
             return redirect('loginpage')
+
 
 # To add the product to the wishlist
 class addtowishlist(View):
@@ -218,9 +249,7 @@ class addtowishlist(View):
                 return JsonResponse({'status': 'No such product found'})
         else:
             return JsonResponse({'status': 'Please Login to continue'})
-        
-   
-        
+               
 
 # To delete product from the deletewishlistitem
 class deletewishlistitem(View):
@@ -254,13 +283,16 @@ class checkoutpage(View):
 
         cartitems = Cart.objects.filter(user=request.user)
         sub_total = sum(item.product.price * item.product_qty for item in cartitems)
-        
+        delivary_charge = 50
         # Retrieve applied coupon information from the session
         discount = request.session.get('discount', 0)
         
-        # Calculate total price after applying the coupon discount
-        total_price = sub_total - discount
-        
+        # Calculate total price after applying the coupon discount with delivary charge and sub_total
+        if sub_total >= 5000:
+            total_price = sub_total - discount
+        else:
+            total_price = (sub_total - discount) + delivary_charge
+         
         
         userprofile = Profile.objects.filter(user=request.user).first()
         wishlist = Wishlist.objects.filter(user=request.user.id)
@@ -308,7 +340,13 @@ class placeorder(View):
         cart = Cart.objects.filter(user=request.user)
         discount = request.session.get('discount', 0)
         cart_total_price = sum(item.product.price * item.product_qty for item in cart) - discount
+        sub_total = sum(item.product.price * item.product_qty for item in cart)
+        delivary_charge = 50
         
+        # Add Shipping charge if the sub total is less than 5000 Rs
+        if sub_total <= 5000:
+            cart_total_price = cart_total_price + delivary_charge
+         
         # Clear coupon-related session variables after placing the order
         if 'coupon_code' in request.session:
             del request.session['coupon_code']
@@ -403,8 +441,17 @@ class razorpaycheck(View):
     '''To add Razorpaycheck payment '''
     def get(self,request,*args, **kwargs):
         cart = Cart.objects.filter(user=request.user)
+         
+        # Retrieve applied coupon information from the session
         discount = request.session.get('discount', 0)
+       
         total_price = sum(item.product.price * item.product_qty for item in cart) - discount
+        sub_total = sum(item.product.price * item.product_qty for item in cart)
+        delivary_charge = 50
+        
+        # Calculate the total_price if the sub_total is less than 5000 Rs.
+        if sub_total <= 5000:
+            total_price = total_price + delivary_charge
         
         
         return JsonResponse({
@@ -531,9 +578,12 @@ class applycoupon(View):
             return redirect(reverse('cart'))
 
         if coupon.valid_from <= timezone.now() <= coupon.valid_to:
-            request.session['coupon_code'] = coupon_code
-            request.session['discount'] = coupon.discount
-            messages.success(request, 'Your coupon applied successfully.')
+            if 'coupon_code' in request.session:
+                messages.warning(request, "Your coupon is already applied.")
+            else:
+                request.session['coupon_code'] = coupon_code
+                request.session['discount'] = coupon.discount
+                messages.success(request, 'Your coupon applied successfully.')
         else:
             messages.error(request, 'The coupon code is not valid or expired.')
 
