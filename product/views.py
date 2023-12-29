@@ -30,8 +30,7 @@ class home(View):
             'cartitem': cartitem,
             'total_quantity': total_quantity,
             'total_item':total_item
-            
-        }
+         }
 
         return context
 
@@ -69,9 +68,9 @@ class CategoryView(View):
     def get_context_data(self,request, category_name):
         predefined_categories = ['T-shirt','Shirt','Jacket','Jeans']
         if category_name:
-            category_items = MenClothing.objects.filter(category__name__iexact=category_name, is_featured=True)
+            category_items = MenClothing.objects.filter(category__name__iexact=category_name)
         else:
-            category_items = MenClothing.objects.filter(category__name__iexact__in=predefined_categories, is_featured=True)
+            category_items = MenClothing.objects.filter(category__name__iexact__in=predefined_categories)
 
         cart_items = Cart.objects.filter(user=self.request.user.id)
         total_quantity = sum(item.product_qty for item in cart_items)
@@ -526,7 +525,7 @@ class ordercancel(View):
     def post(self,request, order_id):
         order = get_object_or_404(Order, id=order_id, user=request.user)
         
-        if order.status:
+        if order.status == "Pending":
             order.delete()
             return JsonResponse({'status': 'Your Order Cancelled Successfully'})
         return JsonResponse({'status': 'Cancellation not allowed'})

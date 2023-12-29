@@ -82,7 +82,7 @@ class home(View):
             'bannerimage': bannerimage,
             'cartitem': cartitem,
             'total_quantity': total_quantity,
-             'total_item':total_item
+            'total_item':total_item
         }
 
         return context

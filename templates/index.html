@@ -49,6 +49,7 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 <!-- Default theme -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
 <style>
   .header-main {
     position: sticky;
@@ -58,6 +59,48 @@
   }
 
 </style>
+<style>
+  .button-container {
+      position: relative;
+      width: 100%;
+      text-align: center;
+  }
+
+  .w3-button {
+      position: absolute;
+      top: 50%;
+      width: 100px;
+      transform: translateY(-50%);
+  }
+  .w3-button {
+    display: inline-block;
+    background-color: transparent;
+    color: whitesmoke; /* Text color */
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 24px; /* Adjust font size for larger arrows */
+}
+
+  .w3-button:hover {
+    color: #f1f1f1; /* Hover background color */
+}
+  .w3-display-left {
+      left: 0;
+      top: 427.275px;
+  }
+
+  .w3-display-right {
+      right: 0;
+      top: 427.275px;
+  }
+
+  .mySlides img {
+      width: 100%;
+  }
+</style>
+
 </head>
 <body>
   <header class="section-header" >
@@ -112,8 +155,9 @@
                               </ul>
                               {% else %}
                               <!-- <small class="title text-muted ">Welcome</small> -->
-                              <div class = "pt-3 ">
-                                  <a href="./signin.html"> Login</a> <span class="dark-transp"></span>
+                              <div class = "py-2 mt-2 ">
+                                {% csrf_token %}
+                                  <a href="{% url 'loginpage' %}"> Login</a> <span class="dark-transp"></span>
                                   <!-- <a href="./register.html"> Register</a> -->
                               </div>
                               {% endif %}
@@ -150,7 +194,7 @@
 
 
 <!-- ========================= SECTION MAIN ========================= -->
-<div class="banner">
+<!-- <div class="banner">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -175,8 +219,23 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-  </div>
- 
+  </div> -->
+
+  <div class="w3-content w3-display-container">
+    {% for image in bannerimage %}
+    <div class="mySlides">
+        <div class="button-container">
+            <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+        <a href="{% url 'store' %}">
+        <img src="{{ image.image.url }}" alt="Banner Image">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+   
 <!-- ========================= SECTION MAIN END// ========================= -->
 
 <!-- ========================= SECTION  ========================= -->
@@ -184,7 +243,7 @@
     <div class="container">
         <header class="section-heading">
             <a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
-            <h3 class="section-title">Elevate Your Style</h3>
+            <h3 class="section-title" style="font-weight: 400;">Elevate Your Style</h3>
         </header><!-- sect-heading -->
         <div class="row">
             {% for prod in prods %}
@@ -212,109 +271,58 @@
 <!-- Remove the container if you want to extend the Footer to full width. -->
 <!-- <div class="container my-5"> -->
     <!-- Footer -->
-    <footer class="text-center text-white" style="background-color: #3f51b5">
+    <footer class="text-center text-white">
       <!-- Grid container -->
-      <div class="container-fluid">
-        <!-- Section: Links -->
-        <section class="mt-5">
-          <!-- Grid row-->
-          <div class="row text-center d-flex justify-content-center pt-5">
-            <!-- Grid column -->
-            <div class="col-md-2">
-              <h6 class="text-uppercase font-weight-bold">
-                <a href="#!" class="text-white">About us</a>
-              </h6>
-            </div>
-            <!-- Grid column -->
-  
-            <!-- Grid column -->
-            <div class="col-md-2">
-              <h6 class="text-uppercase font-weight-bold">
-                <a href="#!" class="text-white">Products</a>
-              </h6>
-            </div>
-            <!-- Grid column -->
-  
-            <!-- Grid column -->
-            <div class="col-md-2">
-              <h6 class="text-uppercase font-weight-bold">
-                <a href="#!" class="text-white">Awards</a>
-              </h6>
-            </div>
-            <!-- Grid column -->
-  
-            <!-- Grid column -->
-            <div class="col-md-2">
-              <h6 class="text-uppercase font-weight-bold">
-                <a href="#!" class="text-white">Help</a>
-              </h6>
-            </div>
-            <!-- Grid column -->
-  
-            <!-- Grid column -->
-            <div class="col-md-2">
-              <h6 class="text-uppercase font-weight-bold">
-                <a href="#!" class="text-white">Contact</a>
-              </h6>
-            </div>
-            <!-- Grid column -->
-          </div>
-          <!-- Grid row-->
+      <div  style="background-color: #ffff;">
+        <!-- Section: Social media -->
+        <section >
+        
+    
+          <!-- Instagram -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-instagram"></i
+          ></a>
+    
+          <!-- Linkedin -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <!-- Github -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-github"></i
+          ></a>
+         
         </section>
-        <!-- Section: Links -->
-  
-        <hr class="my-5" />
-  
-        <!-- Section: Text -->
-        <section class="mb-5 ">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-8">
-              <p>
-                Welcome to iCart, your premier online shopping destination where convenience, choice, and quality converge to enhance your retail experience.
-
-At iCart, we've reimagined the way you shop, providing you with a seamless, user-friendly platform that offers an unparalleled selection of products, all just a click away.
-              </p>
-            </div>
-          </div>
-        </section>
-        <!-- Section: Text -->
-  
-        <!-- Section: Social -->
-        <section class="text-center mb-5">
-          <a href="" class="text-white me-4">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="" class="text-white me-4">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="" class="text-white me-4">
-            <i class="fab fa-google"></i>
-          </a>
-          <a href="" class="text-white me-4">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="" class="text-white me-4">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="" class="text-white me-4">
-            <i class="fab fa-github"></i>
-          </a>
-        </section>
-        <!-- Section: Social -->
+        <!-- Section: Social media -->
       </div>
       <!-- Grid container -->
-  
-      <!-- Copyright -->
-      <div
-           class="text-center p-3"
-           style="background-color: rgba(0, 0, 0, 0.2)"
-           >
-        © 2023 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/"
-           >icart.com</a
-          >
+    
+     <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; width: 100%;">
+      <div>
+        © 2023 
+        <a class="text-dark" href="https://mdbootstrap.com/">Icart |  All Rights Reserved</a>
       </div>
+      <div>
+        <a class="btn float-right" href="#!" role="button" data-mdb-ripple-color="dark"><p>Contact us</p></a>
+      </div>
+    </div>
+    
       <!-- Copyright -->
+    
+    
     </footer>
     <!-- Footer -->
   <!-- </div> -->
@@ -347,5 +355,24 @@ function startAutocomplete(availableTags)
         alertify.success('{{ msg }}');
     ('{% endfor %}')
 </script>
+<script>
+  var slideIndex = 1;
+  showDivs(slideIndex);
+  
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+  
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    x[slideIndex-1].style.display = "block";  
+  }
+  </script>
 </body>
 </html>

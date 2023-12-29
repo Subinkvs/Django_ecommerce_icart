@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}My Profile order{% endblock %}
 {% block content %}
-<section class="section-content padding-y bg" style="width: 1519.2px; height: 661px;">
+<section class="section-content padding-y bg" >
 	<div class="container">
 		<div class="row">
 		<aside class="col-md-3">
@@ -16,8 +16,8 @@
 			<a class="btn btn-light btn-block" href="{% url 'logoutpage' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
 			<!--   SIDEBAR .//END   -->
 		</aside>
-        <section class="intro" style="width: 75%; height: 700px; margin-bottom:0px">
-            <div class="bg-image h-150" style="background-color: #f5f7fa;">
+        <section class="intro" style="width: 75%; height: 700px; ">
+            <div class="bg-image h-150 " style="background-color: #f5f7fa; width: 950px;">
               <div class="mask d-flex align-items-center h-100">
                 <div class="container ">
                   <div class="row justify-content-center">
@@ -27,7 +27,7 @@
                           <h3 class="mb-0" style="font-family: Arial, sans-serif; font-weight: 100;">Welcome {{ request.user.first_name }}! ... Here Is Your Order History</h3>
                         </div>
                         <div class="card-body p-0 ">
-                          <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height:350px">
+                          <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px;">
                             <table class="table table-bordered  mb-0 ">
                             {% if total_items > 0 %}
                               <thead style="background-color: #002d72;">
@@ -51,8 +51,7 @@
                                             <td><a href="{% url 'order-view' item.tracking_no %}" class="btn btn-info">View</a></td>
                                             <td>
                                                 {% if item.status == 'Pending' %}
-                                                    <input type="hidden" value="{{ item.id }}">
-                                                    <button class="btn btn-danger" id="cancelOrderBtn" data-order-id="{{ item.id }}">Cancel Order</button>
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">Cancel Order</button>
                                                 {% elif item.status == 'Completed' %}
                                                     <h6>Completed</h6>
                                                     {% else %}
@@ -85,6 +84,11 @@
                             </tbody>
                             
                             </table>
+                            <br>
+                            <div style="justify-content: center; align-items: center; text-align: center;">
+                              <a href="{% url 'index' %}" class="btn text-white bg-dark my-2 mb-2">Continue Shopping</a>
+                            
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -94,6 +98,27 @@
               </div>
             </div>
           </section>
+  </div>
+   <!-- Modal -->
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmation</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Do you really want to cancel this order?</p>
+        </div>
+      {% if orders %}
+        <div class="modal-footer">
+          <input type="hidden" value="{{ orders.0.id }}">
+          <button type="button" class="btn btn-default" id="cancelOrderBtn" data-order-id="{{ orders.0.id }}">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+       </div>
+      {% endif %}    
+      </div>
+    </div>
   </div>
 <section>
 
