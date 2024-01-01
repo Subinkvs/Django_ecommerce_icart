@@ -38,7 +38,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django_light',
     'admin_tools_stats',
-    'django_nvd3',
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',

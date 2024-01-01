@@ -165,6 +165,7 @@ class cart(View):
                 discount = 0
                 
             
+                
             wishlist = Wishlist.objects.filter(user=request.user.id)
             total_item =len(wishlist)
 
@@ -175,7 +176,8 @@ class cart(View):
                        'discount':discount, 
                        'total_price':total_price,
                        'coupon_code':coupon_code,
-                       'delivary_charge':delivary_charge
+                       'delivary_charge':delivary_charge,
+                       
                        }
             return render(request, 'cart.html', context)
         else:
