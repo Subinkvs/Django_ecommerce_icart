@@ -592,4 +592,22 @@ class applycoupon(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+    
+    
+class contactpage(View):
+    
+    template_name = 'contact.html'
+    
+    def get(self, request, *args, **kwargs):
+        cartitem = Cart.objects.filter(user=request.user.id)
+        wishlist = Wishlist.objects.filter(user=request.user.id)
+        total_quantity = sum(item.product_qty for item in cartitem)
+        total_item =len(wishlist)
+        context = {
+            'cartitem':cartitem,
+            'wishlist':wishlist,
+            'total_quantity':total_quantity,
+            'total_item':total_item
+        }
+        return render(request, 'contact.html', context)
         
