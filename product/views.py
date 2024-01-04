@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect,HttpResponse,reverse
 from .models import *
+from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -9,8 +11,15 @@ from accounts.models import User
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.views import View
 from django.utils import timezone
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from io import BytesIO
+import pdfkit
 import random
+
 #  Create your views here. 
+config = "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+
 
 # To render the landing page of the project
 class home(View):
@@ -593,9 +602,9 @@ class applycoupon(View):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
     
-    
+# To view the contact page of the website   
 class contactpage(View):
-    
+    '''To view the contact page of the website'''
     template_name = 'contact.html'
     
     def get(self, request, *args, **kwargs):
@@ -610,4 +619,29 @@ class contactpage(View):
             'total_item':total_item
         }
         return render(request, 'contact.html', context)
+   
+    
+# Invoice html page
+class InvoicePDF(View):
+    '''Invoice html page'''
+    template_name = "order_complete.html"
+    
+    def get(self, request, t_no, *args, **kwargs):
+        order = Order.objects.filter(tracking_no=t_no).filter(user=request.user.id).first()
+        orderitems = OrderItem.objects.filter(order=order)
+        cartitem = Cart.objects.filter(user=request.user.id)
+        total_quantity = sum(item.product_qty for item in cartitem)
+        wishlist = Wishlist.objects.filter(user=request.user.id)
+        total_item =len(wishlist)  
         
+        context = {
+            'order':order,
+            'orderitems':orderitems,
+            'cartitem':cartitem,
+            'total_quantity':total_quantity,
+            'wishlist':wishlist,
+            'total_item':total_item
+            }
+        return render(request, 'order_complete.html', context)
+    
+

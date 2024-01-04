@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}My Orders{% endblock  %}
 {% block content %}
-<section class="intro">
-    <div class="bg-image h-150 mt-2" style="background-color: #f5f7fa;">
+<section class="intro" style="height: 800px;">
+    <div class="bg-image h-150 mt-2" style="background-color: #f5f7fa; height: 800px;">
       <div class="mask d-flex align-items-center h-100">
         <div class="container ">
           <div class="row justify-content-center">
@@ -10,7 +10,9 @@
               <div class="card">
                 <div class="card-header card-shadow">
                   <h3 class="mb-0" style="font-family: Arial, sans-serif;">Order View
-                    <a href="{% url 'my-orders' %}" class="btn btn-warning float-end text-white"><i class="fa fa-reply pr-2"></i>Back</a>
+                    
+                    <a href="{% url 'dowload-invoice' order.tracking_no  %}" style="font-size: 25px; color:green;" class="btn float-right ">Invoice</a>
+                   
                   </h3> 
                 </div>
                 <div class="card-body p-0 ">

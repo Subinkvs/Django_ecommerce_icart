@@ -1,269 +1,101 @@
-<!DOCTYPE HTML>
+{% extends 'base.html' %}
 {% load static %}
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="pragma" content="no-cache" />
-<meta http-equiv="cache-control" content="max-age=604800" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>GreatKart | One of the Biggest Online Shopping Platform</title>
-
-<link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
-
-<!-- jQuery -->
-<script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
-
-<!-- Bootstrap4 files-->
-<script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
-<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
-
-<!-- Font awesome 5 -->
-<link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
-
-<!-- custom style -->
-<link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css"/>
-<link href="{% static 'css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-
-<!-- custom javascript -->
-<script src="{% static 'js/script.js' %}" type="text/javascript"></script>
-
-<script type="text/javascript">
-/// some script
-
-// jquery ready start
-$(document).ready(function() {
-	// jQuery code
-
-}); 
-// jquery end
-</script>
-<style>
-	.header-main {
-	  position: sticky;
-	  padding-top: 1rem;
-	  padding-bottom: 1rem;
-	  z-index: 1000;
-	}
-  </style>  
-
-</head>
-<body>
-    <header class="section-header">
-        <!-- <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
-        <div class="container">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarTop4">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">   Language </a>
-                    <ul class="dropdown-menu small">
-                        <li><a class="dropdown-item" href="#">English</a></li>
-                        <li><a class="dropdown-item" href="#">Arabic</a></li>
-                        <li><a class="dropdown-item" href="#">Russian </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> USD </a>
-                    <ul class="dropdown-menu small">
-                        <li><a class="dropdown-item" href="#">EUR</a></li>
-                        <li><a class="dropdown-item" href="#">AED</a></li>
-                        <li><a class="dropdown-item" href="#">RUBL </a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-                <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
-            </ul> <!-- list-inline //  -->
-          <!-- </div> navbar-collapse .// -->
-        <!-- </div> container //  -->
-        <!-- </nav> --> 
-        
-        <section class="header-main border-bottom">
-            <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-2 col-md-3 col-6">
-                <a href="{% url 'index' %}" class="brand-wrap">
-                    <img class="logo" src="{% static './images/logo.png' %}">
-                </a> <!-- brand-wrap.// -->
-            </div>
-            <div class="col-lg col-sm col-md col-6 flex-grow-0">
-                <div class="category-wrap dropdown d-inline-block float-right">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
-                        <i class="fa fa-bars"></i> All category 
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Machinery / Mechanical Parts / Tools </a>
-                        <a class="dropdown-item" href="#">Consumer Electronics / Home Appliances </a>
-                        <a class="dropdown-item" href="#">Auto / Transportation</a>
-                        <a class="dropdown-item" href="#">Apparel / Textiles / Timepieces </a>
-                        <a class="dropdown-item" href="#">Home & Garden / Construction / Lights </a>
-                        <a class="dropdown-item" href="#">Beauty & Personal Care / Health </a> 
-                    </div>
-                </div>  <!-- category-wrap.// -->
-            </div> <!-- col.// -->
-            <a href="./store.html" class="btn btn-outline-primary">Store</a>
-            <div class="col-lg  col-md-6 col-sm-12 col">
-                <form action="#" class="search">
-                    <div class="input-group w-100">
-                        <input type="text" class="form-control" style="width:60%;" placeholder="Search">
-                        
-                        <div class="input-group-append">
-                          <button class="btn btn-primary" type="submit">
-                            <i class="fa fa-search"></i>
-                          </button>
-                        </div>
-                    </div>
-                </form> <!-- search-wrap .end// -->
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-                        <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                            <div class="widget-header">
-                                <small class="title text-muted">Welcome guest!</small>
-                                <div> 
-                                    <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>
-                                    <a href="./register.html"> Register</a>
-                                </div>
-                            </div>
-                            <a href="./cart.html" class="widget-header pl-3 ml-3">
-                                <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-                                <span class="badge badge-pill badge-danger notify">0</span>
-                            </a>
-                        </div> <!-- widgets-wrap.// -->
-                    </div> <!-- col.// -->
-        </div> <!-- row.// -->
-            </div> <!-- container.// -->
-        </section> <!-- header-main .// -->
-        
-        
-        
-        </header> <!-- section-header.// -->
-        
-<div class="container" style="margin-top: 50px;">
-    <center><i class="fas fa-check-circle" style="font-size: 72px;margin-bottom: 20px;color: #28A745;"></i></center>
-    <h2 class="text-center">Payment Successful</h2>
-	<br>
-	<div class="text-center">
-		<a href="{% url 'index' %}" class="btn btn-success">Shop more</a>
-	</div>
+{% block content %}
+<div class="container" style="margin-top: 10px;">
+    <h1 class="text-center">Invoice</h1>
 </div>
-
+<div>
+    <button class="btn btn-primary float-right" style="margin-right: 380px;" id="download">Download PDF</button>
+</div>
 <div class="container" style="margin: 0 auto;width: 50%;padding: 50px;background: #f1f1f1;margin-top: 50px;margin-bottom: 50px;">
     <div class="row invoice row-printable">
         <div class="col-md-12">
             <!-- col-lg-12 start here -->
-            <div class="panel panel-default plain" id="dash_0">
+            <div class="panel panel-default plain" id="dash_0" >
                 <!-- Start .panel -->
-                <div class="panel-body p30">
-                   
+                <div class="panel-body " id="invoice">
                     <div class="row">
-                       
                         <!-- Start .row -->
-                        <div class="col-lg-6">
-                            
-                            <!-- col-lg-6 start here -->
-                            <div class="invoice-logo"><img src="/images/logo.png" alt="Invoice logo" style="max-height: 40px;"></div>
-                        </div>
+                       
                         <!-- col-lg-6 end here -->
-                      
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 float-left" >
                             <!-- col-lg-6 start here -->
-                           
-                            <div class="invoice-from">
-                              <ul class="list-unstyled text-right">
-                                <li><strong>Invoiced To</strong></li>
-                                {% for item in profile  %}
-                                <li>{{item.user}} </li>
-                                <li>{{item.address}}</li>
-                                <li>{{item.country}}</li>
-                                {% endfor %}
+                            <div class="invoice-from" >
+                                <ul class="list-unstyled text-left">
+                                    <li><strong>Invoiced To</strong></li>
+                                    <li>{{ order.firstname}} {{order.lastname}}</li>
+                                    <li>{{ order.address }}</li>
+                                    <li>{{ order.city }}, {{ order.state }}</li>
+                                    <li>{{order.pincode}}</li>
+                                    <li>{{ order.country }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                            <div class="col-lg-6 ">
                                 
-                             
-                                 
-                              </ul>
-                               </div>
-                        </div>
-                        <!-- col-lg-6 end here -->
+                                <ul class="list-unstyled" style="margin-left: 120px;">
+                                    <li style="padding: right 50px;"><strong>Date</strong></li>
+                                    <li>{{order.created_at}}</li>
+                                </ul>
+                            </div>
+                       
                         
+                        <!-- col-lg-6 end here -->
                         <div class="col-lg-12">
                             <!-- col-lg-12 start here -->
                             <div class="invoice-details mt25">
-                                
                                 <div class="well">
                                     <ul class="list-unstyled mb0">
-                                        <li><strong>Order</strong> #</li>
-                                        <li><strong>Transaction</strong> #</li>
-                                        <li><strong>Order Date:</strong>{{orders.created_at}}</li>
-                                        <li><strong>Status:</strong> {{orders.status}}</li>
+                                        <h4 class="mt-2">Grand Total : <span >₹ {{order.total_price}}</span></h4>
+                                        <h6 class="border p-2"> Payment Mode: {{order.payment_mode}}</h6>
+                                        <h6 class="border p-2"> Order Status: {{order.status}}</h6>
+                                        <h6 class="border p-2"> Tracking No: {{order.tracking_no}}</h6>
                                     </ul>
                                 </div>
-                               
                             </div>
-                           
+
                             <div class="invoice-items">
                                 <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="per70 text-center">Description</th>
+                                                <th class="per70 text-center">Products</th>
                                                 <th class="per5 text-center">Qty</th>
-                                                <th class="per25 text-center">Total</th>
+                                                <th class="per25 text-center">Unit Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for item in cartitem  %}
+                                            {% for item in orderitems %}
                                             <tr>
-                                                <td>{{item.product.title}}</td>
-                                                <td class="text-center">{{item.product_qty}}</td>
-                                                <td class="text-center">Rs {{total_unit_price}}</td>
+                                                <td>{{ item.product.name }}</td>
+                                                <td class="text-center">{{ item.quantity }}</td>
+                                                <td class="text-center">₹ {{ item.price}}</td>
                                             </tr>
-                                             {% endfor %}
-                                            <!-- <tr>
-                                                <td>Logo design</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">$200.00 USD</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Backup - 1024MB Cloud 2.0 Server - elisium.dynamic.com</td>
-                                                <td class="text-center">12</td>
-                                                <td class="text-center">$12.00 USD</td>
-                                            </tr> -->
+                                            {% endfor %}
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="2" class="text-right">Sub Total:</th>
-                                                <th class="text-center">$237.00 USD</th>
+                                                <th colspan="2" class="text-right">Total price:</th>
+                                                <th class="text-center">₹ {{ order.total_price }}</th>
                                             </tr>
-                                            <tr>
-                                                <th colspan="2" class="text-right">Tax:</th>
-                                                <th class="text-center">$47.40 USD</th>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <th colspan="2" class="text-right">Grand Total:</th>
-                                                <th class="text-center">$284.4.40 USD</th>
-                                            </tr>
+                                           
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
                             <div class="invoice-footer mt25">
-                                <p class="text-center">Thank you for shopping with us!</p>
+                                <h6 class="text-center" style="font-weight:300">Thank you for shopping with us!</h6>
                             </div>
                         </div>
                         <!-- col-lg-12 end here -->
                     </div>
                     <!-- End .row -->
-                 
                 </div>
             </div>
             <!-- End .panel -->
         </div>
         <!-- col-lg-12 end here -->
     </div>
-    </div>
-</body>
-</html>
+</div>
+{% endblock %}

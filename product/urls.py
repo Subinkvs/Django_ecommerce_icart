@@ -27,5 +27,7 @@ urlpatterns = [
     path('orderwishlist', profilewishlist.as_view(), name='profilewishlist'),
     path('store', store.as_view(), name='store'),
     path('applycoupon', applycoupon.as_view(), name='applycoupon'),
-    path('contact', contactpage.as_view(), name='contactpage')
+    path('contact', contactpage.as_view(), name='contactpage'),
+    path('dowload-invoice/<str:t_no>', InvoicePDF.as_view(), name='dowload-invoice')
+  
 ]
