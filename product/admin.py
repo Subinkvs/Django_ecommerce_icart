@@ -8,26 +8,34 @@ from django.http import HttpResponse
 from django.db.models.functions import TruncDay
 from django.db.models import Count
 from django.core.serializers.json import DjangoJSONEncoder
+from django.shortcuts import render
 import json
 
+class MenClothingAdmin(admin.ModelAdmin):
+    # Add your other admin configurations here
 
-class CategoryAdmin(admin.ModelAdmin):
-    # change_list.html
     def changelist_view(self, request, extra_context=None):
-        # Aggregate new authors per day
-        chart_data = (
-            Category.objects.annotate(date=TruncDay("createdDate"))
-            .values("date")
-            .annotate(y=Count("id"))
-            .order_by("-date")
-        )
-        # Serialize and attach the chart data to the template context
-        as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
-        print("Json %s"%as_json)
-        extra_context = extra_context or {"chart_data": as_json}
-        # Call the superclass changelist_view to render the page
+        # Fetch data from the MenClothing model
+        queryset = MenClothing.objects.order_by('quantity')[:5]
+        
+        # Extract labels and data from the queryset
+        labels = [product.name for product in queryset]
+        data = [product.quantity for product in queryset]
 
+        context = {
+            'labels': labels,
+            'data': data,
+        }
+
+        # Include the dynamic chart script
+        extra_context = extra_context or {}
+        extra_context.update(context)
+        
+
+        # Call the superclass changelist_view to render the page
         return super().changelist_view(request, extra_context=extra_context)
+
+        
 
 # Report product details as PDF
 def download_pdf(self, request, queryset):
@@ -42,7 +50,7 @@ def download_pdf(self, request, queryset):
     
     ordered_queryset = queryset.order_by('-category__id')
     headers = [self.model._meta.get_field(field).verbose_name for field in self.list_display]
-    data = [headers] + list(MenClothing.objects.values_list( *self.list_display, 'category__name',))
+    data = [headers] 
 
 
     
