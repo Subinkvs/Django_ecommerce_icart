@@ -37,9 +37,9 @@ class MenClothingAdmin(admin.ModelAdmin):
 
         
 
-# Report product details as PDF
+# admin side report generator as PDF
 def download_pdf(self, request, queryset):
-    '''Report product details as PDF'''
+    '''admin side report generator as PDF'''
     model_name = self.model.__name__
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename={model_name}.pdf'
@@ -48,7 +48,7 @@ def download_pdf(self, request, queryset):
     pdf = canvas.Canvas(response, pagesize=letter)
     pdf.setTitle('PDF Report')
     
-    ordered_queryset = queryset.order_by('-category__id')
+    ordered_queryset = queryset.order_by('-id')
     headers = [self.model._meta.get_field(field).verbose_name for field in self.list_display]
     data = [headers] 
 
@@ -58,24 +58,24 @@ def download_pdf(self, request, queryset):
         data_row = [str(getattr(obj, field)) for field in self.list_display]
         data.append(data_row)
         
-        table = Table(data)
-        table.setStyle(TableStyle(
-            [
-                ('BACKGROUND', (0,0), (-1,0), colors.grey),
-                ('GRID', (0,0), (-1,-1), 1, colors.black)
-            ]
-         ))
-        
-        canvas_width = 400
-        canvas_height = 400
-        
-        table.wrapOn(pdf, canvas_width, canvas_height)
-        table.drawOn(pdf, 40, canvas_height - len(data))
-        
-        pdf.save()
-        return response
+    table = Table(data)
+    table.setStyle(TableStyle(
+        [
+            ('BACKGROUND', (0,0), (-1,0), colors.grey),
+            ('GRID', (0,0), (-1,-1), 1, colors.black)
+        ]
+        ))
     
-    download_pdf.short_description = "Dowload selected items as PDF"
+    canvas_width = 600
+    canvas_height = 600
+    
+    table.wrapOn(pdf, canvas_width, canvas_height)
+    table.drawOn(pdf, 40, canvas_height - len(data))
+    
+    pdf.save()
+    return response
+    
+download_pdf.short_description = "Dowload selected items as PDF"
     
 # Register your models here.
 '''Menclothing model in admin interface'''
@@ -91,7 +91,7 @@ class CouponAdmin(admin.ModelAdmin):
       list_display = ['code', 'valid_from', 'valid_to', 'discount', 'active']
       list_filter = ['active', 'valid_from', 'valid_to']
       search_fields = ['code']
-
+      actions = [download_pdf]
 
    
 

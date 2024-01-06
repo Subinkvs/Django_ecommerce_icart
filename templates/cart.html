@@ -175,7 +175,6 @@ $(document).ready(function() {
 <tbody>
 	{% for item in cartitem %}
 <tr class="product_data">
-	
 	<td>
 		<figure class="itemside align-items-center">
 			<a href="{% url 'productdetail' item.product.id %}">
@@ -212,7 +211,6 @@ $(document).ready(function() {
 					{% endif %}
 	</td>
 	<td> 
-		
 		<div class="price-wrap py-4"> 
 			<var class="price">₹ {{ item.product.price|floatformat:"0" }}</var> 
 		</div> <!-- price-wrap .// -->
@@ -238,12 +236,9 @@ $(document).ready(function() {
 <br>
 <div style="justify-content: center; align-items: center; text-align: center;">
 	<a href="{% url 'index' %}" class="btn text-white bg-dark my-2 mb-2">Continue Shopping</a>
-
 </div>
-
 {% endif %}
  </td>
-	
 </tr>
 </tbody>
 </table>
@@ -424,7 +419,5 @@ function startAutocomplete(availableTags)
 
 }
 </script> 
-
-
 </body>
 </html>

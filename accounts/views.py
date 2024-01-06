@@ -137,12 +137,25 @@ class loginpage(View):
             passwd = request.POST.get('password')
             user = authenticate(request, username=name, password=passwd)
             
+            '''To view Home page of the website after user login'''
             if user is not None:
                 login(request, user)
                 messages.success(request, "Logged in Successfully")
-                prods = MenClothing.objects.all()
+                prods = MenClothing.objects.filter(is_featured=True)
                 bannerimage = BannerImage.objects.all()
-                return render(request, 'index.html', {'prods': prods, 'bannerimage': bannerimage})
+                cartitem = Cart.objects.filter(user=self.request.user.id)
+                total_quantity = sum(item.product_qty for item in cartitem)
+                wishlist = Wishlist.objects.filter(user=request.user.id)
+                total_item =len(wishlist)
+                context = {'prods': prods, 
+                           'bannerimage': bannerimage, 
+                           'cartitem':cartitem, 
+                           'total_quantity':total_quantity, 
+                           'wishlist':wishlist, 
+                           'total_item':total_item
+                           }
+                
+                return render(request, 'index.html', context)
             else:
                 messages.error(request, "Invalid Username or Password")
                 return redirect('loginpage') 
