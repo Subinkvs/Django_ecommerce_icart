@@ -92,41 +92,39 @@
       {% endblock %}
     </div>
   </div>
-  
   <div>
-    <canvas id="pie-chart"></canvas>
+    <canvas id="myChart"></canvas>
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
-<script>
-
-  var config = {
-    type: 'bar',
-    data : {
-      datasets: [{
-        data : [ 20, 34, 42, 34, 89],
-        backgroundColor: [
-        'red', 'orange', 'blue', 'yellow', 'green'
-        ],
-        label: 'Label'
-      }],
-      labels: [ 'One', 'Two', 'Three', 'Four', 'Five']
-    }, 
-    options : {
-      responsive: true
-    }
-  };
-
-  window.onload = function() {
-    var ctx = document.getElementById('pie-chart').getContext('2d');
-    window.myPie = new Chart(ctx, config);
-  };
-    
-</script>
-
-   
-         
-  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+      
+        var chartData = {{ chart_data|safe }};
+          
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: chartData.labels,
+                  datasets: [{
+                      label: 'Men Clothing Quantity',
+                      data: chartData.data,
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+      
+  </script>
     
 {% endblock %}

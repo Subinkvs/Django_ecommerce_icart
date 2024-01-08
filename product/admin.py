@@ -12,29 +12,26 @@ from django.shortcuts import render
 import json
 
 class MenClothingAdmin(admin.ModelAdmin):
-    # Add your other admin configurations here
+    # ... (your existing admin configurations)
+
+    def get_chart_data(self):
+        labels = []
+        data = []
+
+        queryset = MenClothing.objects.order_by('quantity')
+        for product in queryset:
+            labels.append(product.name)
+            data.append(product.quantity)
+
+        return {'labels': labels, 'data': data}
 
     def changelist_view(self, request, extra_context=None):
-        # Fetch data from the MenClothing model
-        queryset = MenClothing.objects.order_by('quantity')[:5]
-        
-        # Extract labels and data from the queryset
-        labels = [product.name for product in queryset]
-        data = [product.quantity for product in queryset]
-
-        context = {
-            'labels': labels,
-            'data': data,
-        }
-
-        # Include the dynamic chart script
+        # Use the collected data in the changelist_view
         extra_context = extra_context or {}
-        extra_context.update(context)
-        
+        extra_context['chart_data'] = json.dumps(self.get_chart_data())
 
         # Call the superclass changelist_view to render the page
         return super().changelist_view(request, extra_context=extra_context)
-
         
 
 # admin side report generator as PDF
@@ -66,8 +63,8 @@ def download_pdf(self, request, queryset):
         ]
         ))
     
-    canvas_width = 600
-    canvas_height = 600
+    canvas_width = 400
+    canvas_height = 400
     
     table.wrapOn(pdf, canvas_width, canvas_height)
     table.drawOn(pdf, 40, canvas_height - len(data))
