@@ -194,32 +194,7 @@
 
 
 <!-- ========================= SECTION MAIN ========================= -->
-<!-- <div class="banner">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        {% for image in bannerimage  %}
-        <div class="carousel-item active">
-          <a href="{% url 'store' %}">
-            <img src="{{ image.image.url }}" class="d-block w-100" alt="...">
-          </a>
-        </div>
-        {% endfor %}
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div> -->
+
 
   <div class="w3-content w3-display-container">
     {% for image in bannerimage %}
@@ -316,7 +291,7 @@
     <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; width: 100%;">
       <div>
         © 2023 
-        <a class="text-dark" href="https://mdbootstrap.com/">Icart |  All Rights Reserved</a>
+        <a class="text-dark" href="#">Icart |  All Rights Reserved</a>
       </div>
       <div>
         <a class="btn float-right" href="{% url 'contactpage' %}"  role="button" data-mdb-ripple-color="dark"><p>Contact us</p></a>

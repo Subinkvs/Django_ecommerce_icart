@@ -184,17 +184,14 @@ $(document).ready(function() {
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">₹ {{item.product.price|floatformat:"0"}}</var> 
-			
+			<var class="price">₹ {{item.product.price|floatformat:"0"}}</var> 	
 		</div> <!-- price-wrap .// -->
 	</td>
 	<input type="hidden" value="{{ product.id }}" class="prod_id">
 	<input type="hidden" class="form-control qty-input" value="1" readonly style="background-color: white;">
 	<td class="text-right"> 
 		<button type="button" class="btn btn-primary addToCartBtn">Add to cart<i class="fas fa-shopping-cart"></i></button>
-    </td>
-	
-
+    </td>	
 	<td class="text-right"> 
 		<button type="button" class="btn btn-danger delete-wishlist-item">Remove</button>
     </td>
@@ -216,7 +213,6 @@ $(document).ready(function() {
 <br>
 <div style="justify-content: center; align-items: center; text-align: center;">
 	<a href="{% url 'index' %}" class="btn text-white bg-dark my-2 mb-2">Continue Shopping</a>
-
 </div>
 {% endif %}
 </td>
@@ -224,17 +220,13 @@ $(document).ready(function() {
 </tbody>
 </table>
 </div> <!-- card.// -->
-
 <div class="w3-container w3-animate-fading" style="display:flex; justify-content: center;">
 	<p>Free delivary for ₹ 5000 and above purchase..!</p>
 </div>
-
 </aside> <!-- col.// -->
 <aside class="col-lg-3">
-
-	<div class="card">
+<div class="card">
 	<div class="card-body">
-		
 		{% if wishlist == 0 %}
 		<a href="" class="btn btn-danger btn-block">No items to display</a>
 		<a href="#" class="btn btn-light btn-block"></a>
@@ -243,15 +235,12 @@ $(document).ready(function() {
 		<a href="{% url 'cart' %}" class="btn text-secondary btn-block" style="border: 2px solid green; padding: 10px;">
 			Shopping cart
 		</a>
-		
 		{% endif %}
 	</div> <!-- card-body.// -->
 	</div> <!-- card.// -->
-
 </aside> 
 </div> <!--row-->
  <!-- ============================ COMPONENT 1 END .// ================================= -->
-
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
@@ -316,8 +305,6 @@ $(document).ready(function() {
 <script src="{% static '/js/custom.js' %}"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
-    
-    
     ('{% for msg in messages %}')
     alertify.set('notifier', 'position', 'bottom-right');
     alertify.success('<span style="color: green;">{{ msg }}</span>');

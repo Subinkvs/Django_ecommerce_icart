@@ -4,6 +4,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import Table, TableStyle
 from reportlab.lib import colors
+from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.db.models.functions import TruncDay
 from django.db.models import Count
@@ -11,28 +12,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 import json
 
-class MenClothingAdmin(admin.ModelAdmin):
-    # ... (your existing admin configurations)
 
-    def get_chart_data(self):
-        labels = []
-        data = []
-
-        queryset = MenClothing.objects.order_by('quantity')
-        for product in queryset:
-            labels.append(product.name)
-            data.append(product.quantity)
-
-        return {'labels': labels, 'data': data}
-
-    def changelist_view(self, request, extra_context=None):
-        # Use the collected data in the changelist_view
-        extra_context = extra_context or {}
-        extra_context['chart_data'] = json.dumps(self.get_chart_data())
-
-        # Call the superclass changelist_view to render the page
-        return super().changelist_view(request, extra_context=extra_context)
-        
 
 # admin side report generator as PDF
 def download_pdf(self, request, queryset):
