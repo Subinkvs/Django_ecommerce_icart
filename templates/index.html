@@ -51,15 +51,6 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 
 <style>
-  .header-main {
-    position: sticky;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    z-index: 1000;
-  }
-
-</style>
-<style>
   .button-container {
       position: relative;
       width: 100%;
@@ -103,98 +94,90 @@
 
 </head>
 <body>
-  <header class="section-header" >
-      <section class="header-main border-bottom  ">
-          <div class="container ">
-              <div class="row align-items-center">
-                  <div class="col-lg-2 col-md-3 col-6 ">
-                      <a href="./" class="brand-wrap ">
-                          <img class="logo" src="{% static 'images/logo.png' %}">
-                      </a> <!-- brand-wrap.// -->
-                  </div>
-                  <div class="col-lg col-sm col-md col-6 flex-grow-0">
-                    <div class="dropdown">
-                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        All Categories
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='T-shirt' %}">Tshirt</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='Shirt' %}">Shirt</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='Jeans' %}">Jeans</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category-view' category_name='Jacket' %}">Jacket</a></li>
-                    </ul>
-                    
-                    </div>
-                      <!-- category-wrap -->
-                  </div> <!-- col.// -->
-                  <!-- <a href="./store.html" class="btn btn-outline-primary">Store</a> -->
-                  <div class="col-lg col-md-6 col-sm-12 col">
-                      <form action="{% url 'searchproduct' %}" class="search" method="POST">
-                        {% csrf_token %}
-                          <div class="input-group w-100">
-                              <input type="search" required class="form-control" style="width:60%;" id="searchproduct" name="productsearch" placeholder="Search Product">
-  
-                              <div class="input-group-append">
-                                  <button class="btn btn-primary" type="submit">
-                                      <i class="fa fa-search"></i>
-                                  </button>
-                              </div>
-                          </div>
-                      </form> <!-- search-wrap .end// -->
-                  </div> <!-- col.// -->
-                  <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-                      <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                         <div class="widget-header px-4">
-                              {% if request.user.is_authenticated %}
-                              <button class="title text-muted py-2 mt-2" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:white; border:none;">{{request.user}}</button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
-                                <li><a class="dropdown-item" href="{% url 'profile-view' %}">Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'my-orders' %}">My Orders</a></li>
-                                <li><a class="dropdown-item" href="{% url 'logoutpage' %}">Logout</a></li> 
-                              </ul>
-                              {% else %}
-                              <!-- <small class="title text-muted ">Welcome</small> -->
-                              <div class = "py-2 mt-2 ">
-                                {% csrf_token %}
-                                  <a href="{% url 'loginpage' %}"> Login</a> <span class="dark-transp"></span>
-                                  <!-- <a href="./register.html"> Register</a> -->
-                              </div>
-                              {% endif %}
-                          </div>
-                        
-                          <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
-                          <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-                          {% if total_quantity == 0 %}
-                            <span></span>
-                          {% else %}
-                          <span class="badge badge-pill badge-danger notify">{{total_quantity}}</span>
-                          {% endif %}
-                        </a>
-                        <a href="{% url 'wishlist' %}" class="widget-header pl-3 ml-3">
-                          <div class="icon icon-sm rounded-circle border"><i class="fa fa-heart"></i></div>
+  <!-- navbar of icart website -->
+  <nav class="navbar navbar-expand-lg"  style=" position: sticky; top: 0; z-index: 1000; background-color:white">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}"> <img  src="{% static 'images/icons/icart-high-resolution-logo.png' %}" style="width: 100px; height: 50px;"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" ></a>
+          </li>
+         <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              All Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'category-view' category_name='T-shirt' %}">Tshirt</a></li>
+              <li><a class="dropdown-item" href="{% url 'category-view' category_name='Shirt' %}">Shirt</a></li>
+              <li><a class="dropdown-item" href="{% url 'category-view' category_name='Jeans' %}">Jeans</a></li>
+              <li><a class="dropdown-item" href="{% url 'category-view' category_name='Jacket' %}">Jacket</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" ></a>
+          </li>
+           <li class="nav-item ">
+            <a href="{% url 'wishlist' %}" class="widget-header">
+                          <div class="icon icon-sm "> <img class="logo" src="{% static 'images/icons/wishlisticon.png' %}" style="width:26px; height:26px; align-items:center; "></div>
                           {% if total_item == 0 %}
                           <span ></span>
                           {% else %}
                           <span class="badge badge-pill notify" style="background-color: green; color: white;">{{total_item}}</span>
                           {% endif %}
-                        </a>
-                       
-                      </div> <!-- widgets-wrap.// -->
-                     
-                  </div> <!-- col.// -->
-                 
-              </div> <!-- row.// -->
-             
-          </div> <!-- container.// -->
-          
-      </section> <!-- header-main .// -->
-  </header> <!-- section-header.// -->
-  
-
+                        </a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" ></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'cart' %}" class="widget-header"> 
+                           <div class="icon icon-sm "><img src="{% static 'images/icons/cart.png' %}" style="width:26px; height:26px; align-items:center;"></div>
+                          {% if total_quantity == 0 %}
+                            <span></span>
+                          {% else %}
+                          <span class="badge badge-pill badge-danger notify">{{total_quantity}}</span>
+                          {% endif %}
+                        </a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" ></a>
+          </li>
+           <li class="nav-item dropdown">
+            {% if request.user.is_authenticated %}
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{request.user}}</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+              <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile-view' %}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'my-orders' %}">My Orders</a></li>
+              <li><a class="dropdown-item" href="{% url 'logoutpage' %}">Logout</a></li> 
+            </ul>
+            {% else %}
+            <li class="nav-item">
+              {% csrf_token %}
+              <a class="nav-link active" aria-current="page" href="{% url 'loginpage' %}">Login</a>
+            </li> 
+             {% endif %} 
+          </li>
+        </ul>
+        <form action="{% url 'searchproduct' %}" class="search d-flex" method="POST" style="position: relative; z-index: 2000;">
+          {% csrf_token %}
+          <input class="form-control" required  type="search"  id="searchproduct" name="productsearch" placeholder="Search Product" aria-label="Search" >
+          <button class="btn btn-light" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+        </form>
+        </div>
+    </div>
+  </nav>
 
 <!-- ========================= SECTION MAIN ========================= -->
-
 
   <div class="w3-content w3-display-container">
     {% for image in bannerimage %}
