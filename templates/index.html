@@ -95,7 +95,7 @@
 </head>
 <body>
   <!-- navbar of icart website -->
-  <nav class="navbar navbar-expand-lg"  style=" position: sticky; top: 0; z-index: 1000; background-color:white">
+  <nav class="navbar navbar-expand-lg"  style=" position: sticky; top: 0; z-index: 1000; background-color:white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'index' %}"> <img  src="{% static 'images/icons/icart-high-resolution-logo.png' %}" style="width: 100px; height: 50px;"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +110,7 @@
             <a class="nav-link active" aria-current="page" ></a>
           </li>
          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               All Categories
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -151,7 +151,7 @@
           </li>
            <li class="nav-item dropdown">
             {% if request.user.is_authenticated %}
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{request.user}}</a>
+            <a class="nav-link active dropdown-toggle" href="#" id="dropdownMenuButton2" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{request.user}}</a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
               <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
               <li><a class="dropdown-item" href="{% url 'profile-view' %}">Profile</a></li>
@@ -200,7 +200,7 @@
 <section class="section-name padding-y-sm" style="background-color: rgb(255, 255, 255);">
     <div class="container">
         <header class="section-heading">
-            <a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
+            <a href="{% url 'store' %}" class="btn text-primary float-right" style="border: 1px solid blue;">See all</a>
             <h3 class="section-title" style="font-weight: 400;">Elevate Your Style</h3>
         </header><!-- sect-heading -->
         <div class="row">

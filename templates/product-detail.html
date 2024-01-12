@@ -56,7 +56,7 @@
                                 <!-- Other product details and form elements -->
                                 {% csrf_token %}
                                 <input type="hidden" value="{{ product.id }}" class="prod_id">
-                                <!-- <label for="Quantity">Quantity</label> -->
+                                <!-- <label for="Quantity">Quantity</label>  -->
                                 <div class="row">
                                     <div class="input-group input-spinner">
                                         <div class="input-group-prepend">
@@ -64,8 +64,7 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control qty-input text-dark" value="1" readonly style="background-color: white; color: black;">
-
+                                      <input type="text" class="form-control qty-input" value="1" readonly style="background-color: white;">
                                         <div class="input-group-append">
                                             <button class="btn btn-light ChangeQuantity button-increament" type="button" id="button-minus">
                                                 <i class="fa fa-plus"></i>
@@ -75,9 +74,9 @@
                                 </div> <!-- col.// -->
                          <hr>
                             {% if product.quantity > 0 %}
-                                <button class="btn addToCartBtn" style="border: 1px solid gray;">Add to cart
-                                    <i class="fas fa-shopping-cart px-2"></i></button>
-                                <button class="btn ml-4 addToWishlistBtn" style="border: 1px solid gray;">Wishlist<i class="fas fa-heart px-2 "></i></button>
+                                <button class="btn addToCartBtn text-white" style="border: 1px; background-color:red; ">Add to cart
+                                    </button>
+                                <button class="btn ml-4 addToWishlistBtn" style="border: 1px solid gray;"><i class="fas fa-heart px-2 "></i>Wishlist</button>
                             {% endif %}
                            
                         </article>

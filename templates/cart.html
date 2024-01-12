@@ -20,7 +20,7 @@
   <th scope="col" class="ml-4 col-md-2">Product</th>
   <th scope="col" width="120" class="ml-4 col-md-2">Quantity</th>
   <th scope="col" width="120" class="col-md-2">Unit Price</th>
-  <th scope="col" class="text-right col-md-2" width="200">Remove</th>
+  <th scope="col" class="col-md-2" width="120">Remove</th>
 </tr>
 </thead>
 <tbody>
@@ -66,8 +66,8 @@
 			<var class="price">₹ {{ item.product.price|floatformat:"0" }}</var> 
 		</div> <!-- price-wrap .// -->
 	</td>
-	<td class="text-right "> 
-		<button type="button" class="btn delete-cart-item  py-2 mt-2" > <i class="fas fa-times" style="color:gray"></i></button>
+	<td> 
+		<button type="button" class="btn delete-cart-item  mt-2"  > <i class="fas fa-times" style="color:gray"></i></button>
 	</td>
 </tr>
 {% endfor %}
@@ -143,7 +143,7 @@
 					  <!-- Coupon code input field -->
                       <input type="text" class="coupon-input py-2  mt-2" required class="form-control" name="coupon_code" style="width: 240px; text-align: center;" placeholder="Enter coupon code">
 					  <!-- Apply button -->
-					  <button class="apply-button btn btn-block mt-2 text-dark" style="border: 1px solid gray;" type="submit">Apply</button>
+					  <button class="apply-button btn btn-block mt-2 text-white" style="border: 1px solid; background-color:red" type="submit">Apply</button>
 					</form>
 				</div>
 			{% else %}
@@ -154,7 +154,7 @@
 				
 			</p>
 			{% if total_quantity > 0 %}
-			<a href="{% url 'checkoutpage' %}" class="btn btn-success btn-block" > Checkout </a>
+			<a href="{% url 'checkoutpage' %}" class="btn btn-block text-success" style="border: 1px solid green;"> Checkout </a>
 			<a href="{% url 'index' %}" class="btn text-white bg-dark  btn-block"> Continue Shopping </a>
 			{% else %}
 			<a href="" class="btn btn-danger btn-block">No items to display</a>
