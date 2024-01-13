@@ -35,7 +35,8 @@
       <th scope="col">Product</th>
       <th scope="col" width="120">Product View</th>
       <th scope="col" width="120">Unit Price</th>
-      <th scope="col" class="text-right" width="200"> </th>
+      <th scope="col" style="text-align:center;" width="200">Cart</th>
+      <th scope="col" class="text-right" width="200">Remove</th>
     </tr>
     </thead>
     <tbody>
@@ -56,7 +57,7 @@
                     {% csrf_token %}
                     <input type="hidden" value="{{ item.product.id }}" class="prod_id">
                     <a href="{% url 'productdetail' item.product.id %}">
-                        <button type="button" class="btn btn-info mr-5">View</button>
+                        <button type="button" class="btn mr-5" style="border-color: var(--colorTextBody); font-weight:400;">View</button>
                     </a>
         </td>
         <td> 
@@ -68,10 +69,10 @@
         <input type="hidden" value="{{ product.id }}" class="prod_id">
         <input type="hidden" class="form-control qty-input" value="1" readonly style="background-color: white;">
         <td class="text-right"> 
-            <button type="button" class="btn btn-primary addToCartBtn">Add to cart<i class="fas fa-shopping-cart"></i></button>
+            <button type="button" class="btn addToCartBtn text-white" style="border: 1px ; background-color:red">Add to cart<i class="fas fa-shopping-cart"></i></button>
         </td> 
         <td class="text-right"> 
-            <button type="button" class="btn btn-danger delete-wishlist-item">Remove</button>
+            <button type="button" class="btn delete-wishlist-item"><i class="fas fa-times" style="color:gray"></i></button>
         </td>
     </tr>
     {% endfor %}

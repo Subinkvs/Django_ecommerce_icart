@@ -32,7 +32,7 @@
                                     <td>{{ item.tracking_no }}</td>
                                     <td>₹ {{ item.total_price}}</td>
                                     <td>{{ item.status }}</td>
-                                    <td><a href="{% url 'order-view' item.tracking_no %}" class="btn btn-info">View</a></td>
+                                    <td><a href="{% url 'order-view' item.tracking_no %}" class="btn" style="border-color: var(--colorTextBody); font-weight:400;">View</a></td>
                                     <td>
                                         {% if item.status == 'Pending' %}
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">Cancel Order</button>
