@@ -10,14 +10,12 @@
 				<a class="list-group-item " href="{% url 'profile-view' %}">My Profile</a>
 				<a href="{% url 'profileorder' %}"class="list-group-item">Order history</a>
 			    <a href="{% url 'profilewishlist' %}" class="list-group-item active">My Wishlist</a>
-				<!-- <a class="btn btn-light btn-block"  href="{% url 'logoutpage' %}"><i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> -->
 			</ul>
 			<br>
 			<a class="btn btn-light btn-block" href="{% url 'logoutpage' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
 			<!--   SIDEBAR .//END   -->
 		</aside>
-        
-<section class="section-content " style="width:75%">
+<section class="section-content " style="width:75%; height: 665.88px;">
     <div class="container ">
     
     <!-- ============================ COMPONENT 1 ================================= -->
@@ -26,7 +24,7 @@
         <aside class="col-lg-9">
     <div class="card cartdata" style="width: 900px; height: 350px;">
         <div class="card-header card-shadow">
-            <h3 class="mb-0" style="font-family: Arial, sans-serif; font-weight: 100;">Welcome {{ request.user.first_name }}! ... Here Is Your Wishlist</h3>
+            <h2 style="font-weight: 300;">Shopping Wishlist</h2>
           </div>
     {% if wishlist %}
     <table class="table table-borderless table-shopping-cart">

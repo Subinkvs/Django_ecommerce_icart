@@ -51,20 +51,42 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
-    <style>
-        .header-main {
-          position: sticky;
-          padding-top: 1rem;
-          padding-bottom: 1rem;
-          z-index: 1000;
+ 
+      <style>
+        @media screen and (min-width: 768px) and (min-height: 1028px) and (aspect-ratio: 768/1028) {
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 1500px;
+          }
+      
+          body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+          }
+      
+          main {
+            flex: 1;
+            margin: 0;
+          }
+          footer {
+           
+            text-align: center;
+            margin-top: auto; /* Push the footer to the bottom */
+            margin-bottom: 0px;
+          }
+
         }
-      </style>   
+      </style>
+      
 </head>
 <body>
    <!-- navbar of icart website -->
    <nav class="navbar navbar-expand-lg " style=" position: sticky; top: 0; z-index: 1000; background-color:white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'index' %}"> <img  src="{% static 'images/icons/icart-high-resolution-logo.png' %}" style="width: 100px; height: 50px;"></a>
+      <a class="navbar-brand" href="{% url 'index' %}"> <img  src="{% static 'images/icons/icart-high-resolution-logo.png' %}" style="width: 80px; height: 50px;"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -145,7 +167,6 @@
     </div>
   </nav>
 <div class="container">
-
 </div>
     <section class="section-content padding-y bg ">
         <div class="container">

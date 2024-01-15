@@ -9,14 +9,13 @@
 			<ul class="list-group ">
 				<a class="list-group-item" href="{% url 'profile-view' %}">My Profile</a>
 				<a href="{% url 'profileorder' %}"class="list-group-item active">Order history</a>
-			    <a href="{% url 'profilewishlist' %}" class="list-group-item">My Wishlist</a>
-				<!-- <a class="btn btn-light btn-block"  href="{% url 'logoutpage' %}"><i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> -->
+			  <a href="{% url 'profilewishlist' %}" class="list-group-item">My Wishlist</a>
 			</ul>
 			<br>
 			<a class="btn btn-light btn-block" href="{% url 'logoutpage' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
 			<!--   SIDEBAR .//END   -->
-		</aside>
-        <section class="intro" style="width: 75%; height: 700px; ">
+	 </aside>
+        <section class="intro"style="width:75%; height: 665.88px;">
             <div class="bg-image h-150 " style="background-color: #f5f7fa; width: 950px;">
               <div class="mask d-flex align-items-center h-100">
                 <div class="container ">
@@ -24,7 +23,7 @@
                     <div class="col-12" >
                       <div class="card">
                         <div class="card-header card-shadow">
-                          <h3 class="mb-0" style="font-family: Arial, sans-serif; font-weight: 100;">Welcome {{ request.user.first_name }}! ... Here Is Your Order History</h3>
+                          <h2 style="font-weight: 300;">My Orders</h2>
                         </div>
                         <div class="card-body p-0 ">
                           <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px;">
@@ -95,11 +94,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
-  </div>
-<section>
+           
+  </div> 
+
    <!-- Modal -->
    <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -121,6 +118,8 @@
       </div>
     </div>
   </div>
-
+  </div>
+  </div>
+</section>
 
 {% endblock %}
