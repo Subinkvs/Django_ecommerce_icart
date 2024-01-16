@@ -50,7 +50,7 @@
 <!-- Default theme -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
  
-<style>
+<!-- <style>
 	html,
 body,
 .intro {
@@ -83,7 +83,7 @@ thead {
   top: 0;
   position: sticky;
 }
-</style>
+</style> -->
 <style>
   .mt-2 {
     margin-top: 10px;
@@ -92,6 +92,43 @@ thead {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+<style>
+
+  @media (max-width: 768px) {
+    .pagination a,
+    .pagination span {
+      padding: 4px 5px;
+    }
+  }
+  @media (max-width: 768px){
+    .col-lg-3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+  }
+    }
+  @media (max-width: 820px){
+    .col-lg-3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+  }
+  
+
+  }
+
+
+</style>
+<style>
+  /* Media query for small screens */
+  @media (max-width: 767px) {
+      .img-sm {
+          width: 100px; /* Adjust the size for small screens */
+      }
+  }
+</style>
 </head>
 <body>
    <!-- navbar of icart website -->
@@ -311,6 +348,7 @@ function startAutocomplete(availableTags)
 <script src="{% static '/js/order.js' %}"></script>
 <!-- Ajax for invoice pdf download -->
 <script src="{% static '/js/pdf.js' %}"></script>
+
 </div>
 </body>
 </html>

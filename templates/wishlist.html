@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}My Wishlist{% endblock  %}
 {% block content %}
-<section class="section-content padding-y bg" style="width: 1519.2px; height: 661px;">
+<section class="section-content padding-y bg" style="min-height:90vh;">
 <div class="container ">
 
 <!-- ============================ COMPONENT 1 ================================= -->
@@ -10,17 +10,17 @@
     <h2 style="font-weight: 300;">Shopping Wishlist</h2>
 </div>
 <div class="row ">
-	<aside class="col-lg-9">
+	<aside class="col-lg-9 col-md-12">
 <div class="card  cartdata">
 {% if wishlist %}
-<table class="table table-borderless table-shopping-cart">
+<table class="table table-borderless table-shopping-cart col-md-12">
 <thead class="text-muted">
 <tr class="small text-uppercase">
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Product View</th>
-  <th scope="col" width="120">Unit Price</th>
-  <th scope="col" width="200" style="text-align:center;">Cart</th>
-  <th scope="col" class="text-right" width="200">Remove</th>
+  <th scope="col" class="col-md-2">Product</th>
+  <th scope="col" class="col-md-2" width="120">Product View</th>
+  <th scope="col" class="col-md-2" width="120">Unit Price</th>
+  <th scope="col" class="col-md-2" width="200" style="text-align:center;">Cart</th>
+  <th scope="col" class="col-md-2" class="text-right" width="200">Remove</th>
 </tr>
 </thead>
 <tbody>
@@ -85,7 +85,7 @@
 	<p>Free delivary for ₹ 5000 and above purchase..!</p>
 </div>
 </aside> <!-- col.// -->
-<aside class="col-lg-3">
+<aside class="col-lg-3 col-md-12">
 <div class="card">
 	<div class="card-body">
 		{% if wishlist == 0 %}

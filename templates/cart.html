@@ -3,15 +3,15 @@
 {% block content %}
 
 
-<section class="section-content padding-y bg" style="width: 1519.2px; height: 661px;">
+<section class="section-content padding-y bg" style="min-height:90vh;">
 <div class="container ">
 
 <!-- ============================ COMPONENT 1 ================================= -->
 <div class="pb-2">
     <h2 style="font-weight: 300;">Shopping Cart</h2>
 </div>
-<div class="row">
-	<aside class="col-lg-9 col-md-8">
+<div class="row ">
+	<aside class="col-lg-9 col-md-12">
 <div class="card cartdata">
 {% if cartitem %}
 <table class="table table-borderless table-shopping-cart">
@@ -26,7 +26,7 @@
 <tbody>
 	{% for item in cartitem %}
 <tr class="product_data">
-	<td>
+	<td >
 		<figure class="itemside align-items-center">
 			<a href="{% url 'productdetail' item.product.id %}">
 				<div class="aside"><img src="{{ item.product.image.url }}" class="img-sm"></div>
@@ -98,7 +98,7 @@
 	<p>Free delivary for ₹ 5000 and above purchase...!</p>
 </div>
 	</aside> <!-- col.// -->
-	<aside class="col-lg-3 col-md-4">
+	<aside class="col-lg-3 col-md-12 ">
 
 		<div class="card">
 		<div class="card-body">

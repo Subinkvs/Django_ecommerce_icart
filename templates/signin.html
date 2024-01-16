@@ -3,12 +3,12 @@
 {% block content %}
   
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-conten padding-y" style="min-height:84vh">
+<section class="section-conten padding-y" style="min-height:90vh">
 
     <!-- ============================ COMPONENT LOGIN   ================================= -->
     <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
         <div class="card-body">
-            <h4 class="card-title mb-4">Sign in</h4>
+            <h4 class="card-title mb-4" style="align-items:center; justify-content:center; ">Sign in</h4>
             <form action="{% url 'loginpage' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
