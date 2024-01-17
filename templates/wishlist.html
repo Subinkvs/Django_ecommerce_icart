@@ -11,9 +11,9 @@
 </div>
 <div class="row ">
 	<aside class="col-lg-9 col-md-12">
-<div class="card  cartdata">
+<div class="card  cartdata table-responsive table-scroll"  data-mdb-perfect-scrollbar="true" style="position: relative;">
 {% if wishlist %}
-<table class="table table-borderless table-shopping-cart col-md-12">
+<table class="table table-borderless table-shopping-cart">
 <thead class="text-muted">
 <tr class="small text-uppercase">
   <th scope="col" class="col-md-2">Product</th>
@@ -53,14 +53,14 @@
 	<td class="text-right"> 
 		<button type="button" class="btn addToCartBtn text-white" style="border: 1px ; background-color:red">Add to cart</button>
     </td>	
-	<td class="text-right"> 
+	<td  > 
 		<button type="button" class="btn delete-wishlist-item"><i class="fas fa-times" style="color:gray"></i></button>
     </td>
 </tr>
 {% endfor %}
 {% else %}
 <div class="pl-2 py-4 ml-2"  style="display: flex; justify-content: center; align-items: center; text-align: center; height:250px;">
-	<h5 class="text-info">
+	<h5 style="font-weight:500;">
 		"You haven't placed any orders yet."
 		<br>
 		"We can't wait to have you as a customer."
@@ -86,7 +86,7 @@
 </div>
 </aside> <!-- col.// -->
 <aside class="col-lg-3 col-md-12">
-<div class="card">
+<div class="card" style="background-color:#f5f7fa; border:none;">
 	<div class="card-body">
 		{% if wishlist == 0 %}
 		<a href="" class="btn btn-danger btn-block">No items to display</a>

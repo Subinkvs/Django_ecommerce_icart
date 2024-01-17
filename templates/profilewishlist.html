@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}My Profile wishlist{% endblock %}
 {% block content %}
-<section class="section-content padding-y bg" style="width: 1519.2px; height: 661px;">
+<section class="section-content padding-y bg " style="min-height:90vh;">
 	<div class="container">
 		<div class="row">
 		<aside class="col-md-3">
@@ -15,98 +15,100 @@
 			<a class="btn btn-light btn-block" href="{% url 'logoutpage' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
 			<!--   SIDEBAR .//END   -->
 		</aside>
-<section class="section-content " style="width:75%; height: 665.88px;">
-    <div class="container ">
-    
-    <!-- ============================ COMPONENT 1 ================================= -->
-    
-    <div class="row ">
-        <aside class="col-lg-9">
-    <div class="card cartdata" style="width: 900px; height: 350px;">
-        <div class="card-header card-shadow">
-            <h2 style="font-weight: 300;">Shopping Wishlist</h2>
-          </div>
-    {% if wishlist %}
-    <table class="table table-borderless table-shopping-cart">
-    <thead class="text-muted">
-    <tr class="small text-uppercase">
-      <th scope="col">Product</th>
-      <th scope="col" width="120">Product View</th>
-      <th scope="col" width="120">Unit Price</th>
-      <th scope="col" style="text-align:center;" width="200">Cart</th>
-      <th scope="col" class="text-right" width="200">Remove</th>
-    </tr>
-    </thead>
-    <tbody>
-        {% for item in wishlist %}
-    <tr class="product_data">
-        
-        <td>
-            <figure class="itemside align-items-center">
-                <div class="aside"><img src="{{ item.product.image.url }}" class="img-sm"></div>
-                <figcaption class="info">
-                    <a href="{% url 'productdetail' item.product.id %}" class="title text-dark">{{item.product.title}}</a>
-                 
-                </figcaption>
-            </figure>
-        </td>
-        <td> 
-            <!-- col.// -->
-                    {% csrf_token %}
-                    <input type="hidden" value="{{ item.product.id }}" class="prod_id">
-                    <a href="{% url 'productdetail' item.product.id %}">
-                        <button type="button" class="btn mr-5" style="border-color: var(--colorTextBody); font-weight:400;">View</button>
-                    </a>
-        </td>
-        <td> 
-            <div class="price-wrap"> 
-                <var class="price">Rs {{item.product.price|floatformat:"0"}}</var> 
+        <section class="section-content " style="width:75%; height: 665.88px;">
+            <div class="container ">
+            
+            <!-- ============================ COMPONENT 1 ================================= -->
+            
+            <div class="row ">
+                <aside class="col-lg-9 col-12">
+                    <div class="card  cartdata table-responsive table-scroll"  data-mdb-perfect-scrollbar="true" style="position: relative; ">
+                <div class="card-header card-shadow">
+                    <h2 style="font-weight: 300;">Shopping Wishlist</h2>
+                  </div>
+            {% if wishlist %}
+            <table class="table table-borderless table-shopping-cart">
+            <thead class="text-muted">
+            <tr class="small text-uppercase">
+              <th scope="col">Product</th>
+              <th scope="col" width="120">Product View</th>
+              <th scope="col" width="120">Price</th>
+              <th scope="col" style="text-align:center;" width="200">Cart</th>
+              <th scope="col" class="text-right" width="200">Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in wishlist %}
+            <tr class="product_data">
                 
-            </div> <!-- price-wrap .// -->
-        </td>
-        <input type="hidden" value="{{ product.id }}" class="prod_id">
-        <input type="hidden" class="form-control qty-input" value="1" readonly style="background-color: white;">
-        <td class="text-right"> 
-            <button type="button" class="btn addToCartBtn text-white" style="border: 1px ; background-color:red">Add to cart<i class="fas fa-shopping-cart"></i></button>
-        </td> 
-        <td class="text-right"> 
-            <button type="button" class="btn delete-wishlist-item"><i class="fas fa-times" style="color:gray"></i></button>
-        </td>
-    </tr>
-    {% endfor %}
-    {% else %}
-    <div class="pl-2 py-4 ml-2"  style="display: flex; justify-content: center; align-items: center; text-align: center;">
-        <h5 class="text-info">
-            "You haven't placed any orders yet."
+                <td>
+                    <figure class="itemside align-items-center">
+                        <div class="aside"><img src="{{ item.product.image.url }}" class="img-sm"></div>
+                        <figcaption class="info">
+                            <a href="{% url 'productdetail' item.product.id %}" class="title text-dark">{{item.product.title}}</a>
+                         
+                        </figcaption>
+                    </figure>
+                </td>
+                <td> 
+                    <!-- col.// -->
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ item.product.id }}" class="prod_id">
+                            <a href="{% url 'productdetail' item.product.id %}">
+                                <button type="button" class="btn mr-5" style="border-color: var(--colorTextBody); font-weight:400;">View</button>
+                            </a>
+                </td>
+                <td> 
+                    <div class="price-wrap"> 
+                        <var class="price">₹{{item.product.price|floatformat:"0"}}</var> 
+                        
+                    </div> <!-- price-wrap .// -->
+                </td>
+                <input type="hidden" value="{{ product.id }}" class="prod_id">
+                <input type="hidden" class="form-control qty-input" value="1" readonly style="background-color: white;">
+                <td class="text-right"> 
+                    <button type="button" class="btn addToCartBtn text-white" style="border: 1px ; background-color:red">Add</button>
+                </td> 
+                <td class="text-right"> 
+                    <button type="button" class="btn delete-wishlist-item"><i class="fas fa-times" style="color:gray"></i></button>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <div class="pl-2 py-4 ml-2"  style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                <h5 style="font-weight:500;">
+                    "You haven't placed any orders yet."
+                    <br>
+                    "We can't wait to have you as a customer."
+                </h5>
+            </div>
             <br>
-            "We can't wait to have you as a customer."
-        </h5>
-    </div>
-    <br>
-    <br>
-    <div style="display: flex; justify-content: center; align-items: center; text-align: center;">
-        <strong><p>Take a look at our products here</p></strong>
-    </div>
-    <br>
-    <div style="justify-content: center; align-items: center; text-align: center;">
-        <a href="{% url 'index' %}" class="btn text-white bg-dark">Continue Shopping</a>
+            <br>
+            <div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                <strong><p>Take a look at our products here</p></strong>
+            </div>
+            <br>
+            <div style="justify-content: center; align-items: center; text-align: center;">
+                <a href="{% url 'index' %}" class="btn text-white bg-dark">Continue Shopping</a>
+        
+            </div>
+            
+            {% endif %}
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            </div> <!-- card.// -->
+            
+            </aside> <!-- col.// -->
+           
+            </div> <!--row-->
+             <!-- ============================ COMPONENT 1 END .// ================================= -->
+            
+            </div> <!-- container .//  -->
+            </section>
 
-    </div>
-    
-    {% endif %}
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    </div> <!-- card.// -->
-    
-    </aside> <!-- col.// -->
-   
-    </div> <!--row-->
-     <!-- ============================ COMPONENT 1 END .// ================================= -->
-    
-    </div> <!-- container .//  -->
-    </section>
-    </div>
+</div>
+</div>
 </section>
 {% endblock %}

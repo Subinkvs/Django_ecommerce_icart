@@ -115,9 +115,49 @@ thead {
       align-items: center;
       margin-top: 50px;
   }
-  
-
+}
+@media (max-width: 912px){
+  .col-lg-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    
+}
   }
+
+  @media screen and (max-width: 767px) {
+    .table-scroll {
+      overflow-x: auto;
+    }
+  
+    .table-responsive {
+      width: 100%;
+      overflow: auto;
+      
+    }
+    
+    .table-bordered th,
+    .table-bordered td {
+      white-space: nowrap; /* Prevent text wrapping in cells */
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .intro {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .col-12 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width:390px;
+      min-height: max-content;
+    }
+  }  
 
 
 </style>

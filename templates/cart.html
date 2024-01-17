@@ -10,17 +10,17 @@
 <div class="pb-2">
     <h2 style="font-weight: 300;">Shopping Cart</h2>
 </div>
-<div class="row ">
-	<aside class="col-lg-9 col-md-12">
-<div class="card cartdata">
+<div class="row">
+	<aside class="col-lg-9 ">
+<div class="card cartdata table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative;">
 {% if cartitem %}
 <table class="table table-borderless table-shopping-cart">
 <thead class="text-muted">
-<tr class="small text-uppercase ">
-  <th scope="col" class="ml-4 col-md-2">Product</th>
-  <th scope="col" width="120" class="ml-4 col-md-2">Quantity</th>
-  <th scope="col" width="120" class="col-md-2">Unit Price</th>
-  <th scope="col" class="col-md-2" width="120">Remove</th>
+<tr class="small text-uppercase">
+  <th scope="col" class="ml-4">Product</th>
+  <th scope="col" width="120" class="ml-4">Quantity</th>
+  <th scope="col" width="120" >Unit Price</th>
+  <th scope="col"  width="120">Remove</th>
 </tr>
 </thead>
 <tbody>
@@ -66,14 +66,14 @@
 			<var class="price">₹ {{ item.product.price|floatformat:"0" }}</var> 
 		</div> <!-- price-wrap .// -->
 	</td>
-	<td> 
+	<td > 
 		<button type="button" class="btn delete-cart-item  mt-2"  > <i class="fas fa-times" style="color:gray"></i></button>
 	</td>
 </tr>
 {% endfor %}
 {% else %}
-<div class="pl-2 py-4 ml-2"  style="display: flex; justify-content: center; align-items: center; text-align: center; height:250px;">
-	<h5 class="text-info">
+<div class="pl-2 py-4 ml-2"  style="display: flex; justify-content: center; align-items: center; text-align: center; height:250px; ">
+	<h5 style="font-weight:500;">
 		"You haven't placed any orders yet."
 		<br>
 		"We can't wait to have you as a customer."
