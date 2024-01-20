@@ -139,23 +139,19 @@ class cart(View):
             delivary_charge = 0
         
             
-            # Retrieve applied coupon information from the session
+            ''' Retrieve applied coupon information from the session'''
             coupon_code =request.session.get('coupon_code')
             discount = request.session.get('discount', 0)
-            
-            # if sub_total >= 5000:
-            #     messages.success(request, "Your Shipping charge is free now..!")
-            
-            # Delivary charge is only applied when cart is not empty
+             
+            ''' Delivary charge is only applied when cart is not empty'''
             if total_quantity > 0:
                 delivary_charge = 50
             
             if sub_total <= 5000 and total_quantity > 0 :
                 total_price = sub_total + delivary_charge
-                
-                   
-            # Check if the discount is applied (coupon_code is present)
-            # Calculate total price after applying the coupon discount with delivary charge
+                      
+            ''' Check if the discount is applied (coupon_code is present)'''
+            ''' Calculate total price after applying the coupon discount with delivary charge'''
             if coupon_code and sub_total <= 5000:      
                 total_price = (sub_total - discount) + delivary_charge
              
@@ -217,7 +213,7 @@ class deletecartitem(View):
             cartitem = Cart.objects.get(product_id=prod_id, user=request.user)
             cartitem.delete()
         
-        # Clear coupon-related session variables after placing the order
+        ''' Clear coupon-related session variables after placing the order'''
         if 'coupon_code' in request.session:
             del request.session['coupon_code']
         if 'discount' in request.session:
@@ -294,10 +290,10 @@ class checkoutpage(View):
         cartitems = Cart.objects.filter(user=request.user)
         sub_total = sum(item.product.price * item.product_qty for item in cartitems)
         delivary_charge = 50
-        # Retrieve applied coupon information from the session
+        ''' Retrieve applied coupon information from the session'''
         discount = request.session.get('discount', 0)
         
-        # Calculate total price after applying the coupon discount with delivary charge and sub_total
+        ''' Calculate total price after applying the coupon discount with delivary charge and sub_total'''
         if sub_total >= 5000:
             total_price = sub_total - discount
         else:
@@ -353,11 +349,11 @@ class placeorder(View):
         sub_total = sum(item.product.price * item.product_qty for item in cart)
         delivary_charge = 50
         
-        # Add Shipping charge if the sub total is less than 5000 Rs
+        ''' Add Shipping charge if the sub total is less than 5000 Rs'''
         if sub_total <= 5000:
             cart_total_price = cart_total_price + delivary_charge
          
-        # Clear coupon-related session variables after placing the order
+        ''' Clear coupon-related session variables after placing the order'''
         if 'coupon_code' in request.session:
             del request.session['coupon_code']
         if 'discount' in request.session:
@@ -452,14 +448,14 @@ class razorpaycheck(View):
     def get(self,request,*args, **kwargs):
         cart = Cart.objects.filter(user=request.user)
          
-        # Retrieve applied coupon information from the session
+        ''' Retrieve applied coupon information from the session'''
         discount = request.session.get('discount', 0)
        
         total_price = sum(item.product.price * item.product_qty for item in cart) - discount
         sub_total = sum(item.product.price * item.product_qty for item in cart)
         delivary_charge = 50
         
-        # Calculate the total_price if the sub_total is less than 5000 Rs.
+        ''' Calculate the total_price if the sub_total is less than 5000 Rs.'''
         if sub_total <= 5000:
             total_price = total_price + delivary_charge
         

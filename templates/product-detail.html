@@ -6,11 +6,7 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="max-age=604800">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-   
-    <title>GreatKart | One of the Biggest Online Shopping Platform</title>
-    
-
+    <title>icart | One of the Biggest Online Shopping Platform</title>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
     <!-- jQuery -->
@@ -41,46 +37,45 @@
         // jquery end
     </script>
 
-<!-- jQuery css for search product -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- jQuery css for search product -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-<!-- Alertify CSS -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-<!-- Default theme -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
+    <!-- Alertify CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
  
-      <style>
-        @media screen and (min-width: 768px) and (min-height: 1028px) and (aspect-ratio: 768/1028) {
-          html, body {
-            margin: 0;
-            padding: 0;
-            height: 1500px;
-          }
-      
-          body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-          }
-      
-          main {
-            flex: 1;
-            margin: 0;
-          }
-          footer {
-           
-            text-align: center;
-            margin-top: auto; /* Push the footer to the bottom */
-            margin-bottom: 0px;
-          }
-
+    <style>
+      @media screen and (min-width: 768px) and (min-height: 1028px) and (aspect-ratio: 768/1028) {
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 1500px;
         }
-      </style>
-      
+    
+        body {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          margin: 0;
+        }
+    
+        main {
+          flex: 1;
+          margin: 0;
+        }
+        footer {
+          
+          text-align: center;
+          margin-top: auto; /* Push the footer to the bottom */
+          margin-bottom: 0px;
+        }
+
+      }
+    </style>
 </head>
 <body>
    <!-- navbar of icart website -->
@@ -244,8 +239,7 @@
  
                             <button class="btn ml-4 addToWishlistBtn" style="border: 1px solid gray;"><i class="fas fa-heart px-2 "></i>Wishlist</button>
                             {% endif %}
-                           
-                        </article>
+                         </article>
                     </main>
                 </div>
             </div>
@@ -254,14 +248,12 @@
             <br>
             </div>
     </section>
-
-    <footer class="text-center text-white">
+    <!-- footer -->
+   <footer class="text-center text-white">
         <!-- Grid container -->
         <div  style="background-color: #f8f9fa;">
           <!-- Section: Social media -->
           <section >
-          
-      
             <!-- Instagram -->
             <a
               class="btn btn-link btn-floating btn-lg text-dark m-1"
@@ -316,8 +308,6 @@
 <script src="{% static '/js/custom.js' %}"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
-    
-    
     ('{% for msg in messages %}')
     alertify.set('notifier', 'position', 'bottom-right');
     alertify.success('<span style="color: green;">{{ msg }}</span>');
@@ -329,7 +319,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <!-- jQuery for search product -->
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
 <script>
 var availableTags = [];
 
@@ -353,7 +342,6 @@ function startAutocomplete(availableTags)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/2.2.3/jquery.elevatezoom.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
 <script src="https://cdn.rawgit.com/elevateweb/elevatezoom/master/jquery.elevatezoom.js"></script>
-
 <script>
     $(document).ready(function () {
         $("#zoom").elevateZoom({

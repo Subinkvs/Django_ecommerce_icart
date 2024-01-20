@@ -39,66 +39,14 @@
 			{% endfor %}
 		 </div>
 	</article> <!-- filter-group .// -->
-
-	<!-- filtering based on size of the product  -->
-	<!-- <article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title"></h6>
-			</a>
-		</header>
-		<!-- <div class="filter-content collapse show" id="collapse_4" >
-			{% for prod in prods %}
-			<div class="ml-4">
-				 <label class="checkbox-btn">
-					<input type="checkbox">
-					<span class="btn btn-light"> {{prod.size}}</span>
-			    </label>
-            </div><!-- card-body.// -->
-		<!-- {% endfor %}
-		</div> --> 
-	<!-- </article> 
-
-	<filtering based on price range of the product  -->
-	<!-- <article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<!-- <h6 class="title">Price range </h6> -->
-			<!-- </a> -->
-		<!-- </header> -->
-		<div class="filter-content collapse show" id="collapse_3">
+	<div class="filter-content collapse show" id="collapse_3">
 			<div class="card-body">
-				
 				<div class="form-row">
 				<div class="form-group col-md-6">
-				  <!-- <label>Min</label> -->
-				  <!-- <input class="form-control" placeholder="$0" type="number"> -->
-				  	<!-- <select class="mr-2 form-control">
-						<option value="0">$0</option>
-						<option value="50">$50</option>
-						<option value="100">$100</option>
-						<option value="150">$150</option>
-						<option value="200">$200</option>
-						<option value="500">$500</option>
-						<option value="1000">$1000</option>
-					</select> -->
 				</div>
-				<div class="form-group text-right col-md-6">
-				  <!-- <label>Max</label>
-				  	<select class="mr-2 form-control">
-						<option value="50">$50</option>
-						<option value="100">$100</option>
-						<option value="150">$150</option>
-						<option value="200">$200</option>
-						<option value="500">$500</option>
-						<option value="1000">$1000</option>
-						<option value="2000">$2000+</option>
-					</select> -->
+				<div class="form-group text-right col-md-6"> 
 				</div>
 				</div> <!-- form-row.// -->
-				<!-- <button class="btn btn-block btn-primary">Apply</button> -->
 			</div><!-- card-body.// -->
 		</div>
 	</article> 
@@ -110,7 +58,6 @@
 
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
-			<!-- <span class="mr-md-auto">32 Items found </span> -->
 			
 		</div>
 </header><!-- sect-heading -->
@@ -129,17 +76,13 @@
 					<a href="{% url 'productdetail' prod.id %}" class="title">{{prod.title}}</a>
 					<div class="price-wrap mt-2">
 						<span class="price">₹ {{prod.price}}</span>
-						<!-- <del class="price-old">$1980</del> -->
 					</div> <!-- price-wrap.// -->
 				</div>
-				<!-- <a href="#" class="btn btn-block btn-success">Added to cart </a> -->
 			</figcaption>
 		</figure>
 	</div> <!-- col.// -->
 	{% endfor %}
 </div> 
-
-
 <nav aria-label="Page navigation" >
 	<ul class="pagination">
 	  {% if prods.has_previous %}
@@ -175,12 +118,8 @@
 	  {% endif %}
 	</ul>
   </nav>
-  
-
 	</main> <!-- col.// -->
-
 </div>
-
 </div> <!-- container .//  -->
 </section>
 

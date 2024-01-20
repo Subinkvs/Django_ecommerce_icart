@@ -3,15 +3,11 @@
 {% block content %}
 <section class="section-content padding-y bg" style="min-height:90vh;">
 <div class="container">
-
-
-
 <!-- ============================ COMPONENT 2 ================================= -->
 <form action="{% url 'placeorder' %}" method="POST">
 	{% csrf_token %}
 <div class="row">
 		<main class="col-md-8">
-
 <article class="card mb-4">
 <div class="card-body">
 	<h4 class="card-title mb-4">Order Summary</h4>
@@ -32,8 +28,6 @@
 	</div> <!-- row.// -->
 </div> <!-- card-body.// -->
 </article> <!-- card.// -->
-
-
 <article class="card mb-4">
 <div class="card-body">
 	<h4 class="card-title mb-4">Basic Details</h4>
@@ -148,12 +142,7 @@
   </div>
 </form>
 <!-- ============================ COMPONENT 2 END//  ================================= -->
-
-
-
-
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
-
 {% endblock %}

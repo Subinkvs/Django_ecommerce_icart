@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 {% block title %}My Registerpage{% endblock %}
 {% block content %}
-
-
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-y" style="min-height:90vh;">
-
     <!-- ============================ COMPONENT REGISTER   ================================= -->
     <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
         <article class="card-body">
@@ -19,12 +16,7 @@
                         {% if form.errors.username %}
                             <label class="text-danger">{{form.errors.username}}</label>
                         {% endif %}
-                        <!-- <input type="text" class="form-control" placeholder=""> -->
                     </div>
-                    <!-- <div class="col form-group">
-                        <label>Last name</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div> -->
                 </div>
                 <div class="form-group">
                     <label>Email</label>
@@ -32,7 +24,6 @@
                     {% if form.errors.email %}
                         <label class="text-danger">{{form.errors.email}}</label>
                     {% endif %}
-                    <!-- <input type="email" class="form-control" placeholder=""> -->
                     <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-row">
@@ -42,7 +33,6 @@
                         {% if form.errors.phonenumber %}
                             <label class="text-danger">{{form.errors.phonenumber}}</label>
                         {% endif %}
-                        <!-- <input type="text" class="form-control"> -->
                     </div>
                     </div>
                 <div class="form-row">
@@ -52,7 +42,6 @@
                         {% if form.errors.password1 %}
                             <label class="text-danger">{{form.errors.password1}}</label>
                         {% endif %}
-                        <!-- <input class="form-control" type="password"> -->
                     </div>
                     <div class="form-group col-md-6">
                         <label>Confirm password</label>
@@ -60,7 +49,6 @@
                         {% if form.errors.password2 %}
                             <label class="text-danger">{{form.errors.password2}}</label>
                         {% endif %}
-                        <!-- <input class="form-control" type="password"> -->
                     </div>
                 </div>
                 <div class="form-group">

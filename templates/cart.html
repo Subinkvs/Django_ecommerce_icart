@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block title %}My Shopping Cart{% endblock  %}
 {% block content %}
-
-
 <section class="section-content padding-y bg" style="min-height:90vh;">
 <div class="container ">
 
@@ -99,7 +97,6 @@
 </div>
 	</aside> <!-- col.// -->
 	<aside class="col-lg-3 col-md-12 ">
-
 		<div class="card">
 		<div class="card-body">
 			<dl class="dlist-align">
@@ -150,9 +147,7 @@
 			<div></div>
 			{% endif %}
 			<br>
-			<p class="text-center mb-3">
-				
-			</p>
+			<p class="text-center mb-3"></p>
 			{% if total_quantity > 0 %}
 			<a href="{% url 'checkoutpage' %}" class="btn btn-block text-success" style="border: 1px solid green;"> Checkout </a>
 			<a href="{% url 'index' %}" class="btn text-white bg-dark  btn-block"> Continue Shopping </a>
@@ -166,12 +161,8 @@
 		</div> <!-- card.// -->
 
 </aside> <!-- col.// -->
-
-
 </div> <!-- row.// -->
 <!-- ============================ COMPONENT 1 END .// ================================= -->
-
 </div> <!-- container .//  -->
 </section>
-
 {% endblock %}

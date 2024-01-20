@@ -44,7 +44,9 @@ def download_pdf(self, request, queryset):
         ))
     
     canvas_width = 400
-    canvas_height = 400
+    canvas_height = 300
+    
+    
     
     table.wrapOn(pdf, canvas_width, canvas_height)
     table.drawOn(pdf, 40, canvas_height - len(data))
