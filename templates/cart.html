@@ -134,7 +134,7 @@
 			<br>
 			{% if total_quantity > 0 %}
 			<button class="btn btn-block" style="border: 1px solid gray;" data-toggle="collapse" data-target="#demo">Apply Promo Code</button>
-				<div id="demo" class="collapse">
+				<div id="demo" class="collapse coupon">
 					<form action="{% url 'applycoupon' %}" method="POST">
 					{% csrf_token %}
 					  <!-- Coupon code input field -->
