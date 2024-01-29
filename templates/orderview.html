@@ -24,9 +24,9 @@
                             <label class="mt-2"><h6>Last Name</h6></label>
                             <div class="border p-1">{{order.lastname}}</div>
                             <label class="mt-2"><h6>Email</h6></label>
-                            <div class="border p-1">{{order.email}}</div>
+                            <div class="border p-1">{{request.user.email}}</div>
                             <label class="mt-2"><h6>Contact No</h6></label>
-                            <div class="border p-1">{{order.phone}}</div>
+                            <div class="border p-1">{{request.user.phonenumber}}</div>
                             <label class="mt-2"><h6>Address</h6></label>
                             <div class="border p-1">
                                 {{order.address}},
