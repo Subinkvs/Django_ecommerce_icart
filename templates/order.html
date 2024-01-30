@@ -81,8 +81,8 @@
         </div>
       {% if orders %}
         <div class="modal-footer">
-          <input type="hidden" value="{{ orders.0.id }}">
-          <button type="button" class="btn btn-default" id="cancelOrderBtn" data-order-id="{{ orders.0.id }}">Yes</button>
+          <input type="hidden" value="{{ orders.1.id }}">
+          <button type="button" class="btn btn-default" id="cancelOrderBtn" data-order-id="{{ orders.1.id }}">Yes</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
        </div>
       {% endif %}    
