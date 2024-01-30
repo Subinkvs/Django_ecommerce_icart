@@ -30,7 +30,9 @@
 					<input type="checkbox" >
 					<div class="row">
 						<div class="col">
-							<li  style="height: 30px; line-height: 26px; width:100%;  align-items:center; display:flex;">{{cat.name}}</li>
+							<li style="height: 30px; line-height: 26px; width: 100%; align-items: center; display: flex;">
+								<a href="{% url 'category-view' category_name=cat.name %}" style="color: black;">{{ cat.name }}</a>
+							</li>
 						</div>
 					</div>
 			    </label>
