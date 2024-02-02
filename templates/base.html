@@ -201,7 +201,7 @@
         <form action="{% url 'searchproduct' %}" class="search d-flex" method="POST">
           {% csrf_token %}
           <input class="form-control" required  type="search"  id="searchproduct" name="productsearch" placeholder="Search Product" aria-label="Search">
-          <button class="btn btn-light" type="submit">
+          <button class="btn btn-light" type="submit" >
             <i class="fa fa-search"></i>
         </button>
         </form>
