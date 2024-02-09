@@ -32,6 +32,12 @@ DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = ['13.50.76.156','localhost','www.icart.ltd' ]
 # ALLOWED_HOSTS = []
+# settings.py
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.icart.ltd',
+    # Add other trusted origins if needed
+]
 
 # Application definition
 
