@@ -30,7 +30,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = ['13.50.76.156','localhost']
+ALLOWED_HOSTS = ['13.50.76.156','localhost','www.icart.ltd' ]
 # ALLOWED_HOSTS = []
 
 # Application definition
