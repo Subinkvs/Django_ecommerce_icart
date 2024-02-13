@@ -18,6 +18,7 @@ import pdfkit
 import random
 
 #  Create your views here. 
+''' default installation path for wkhtmltopdf on Windows systems.'''
 config = "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 
 
